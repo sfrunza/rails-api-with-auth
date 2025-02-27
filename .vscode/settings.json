@@ -4,9 +4,21 @@
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "rubyLsp.rubyVersionManager": {
+    "identifier": "rvm"
+  },
   "rubyLsp.formatter": "syntax_tree",
+  "[ruby]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.semanticHighlighting.enabled": true,
+    "editor.formatOnType": true
+  },
   "[erb]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    // "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "elia.erb-formatter",
     "editor.formatOnSave": true
   },
   "prettier.semi": false,

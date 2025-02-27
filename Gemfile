@@ -43,7 +43,8 @@ group :development, :test do
   gem "brakeman", require: false
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem "syntax_tree"
+  # gem "syntax_tree"
+  gem "rubocop-rails-omakase", require: false
   gem "ruby-lsp"
   gem "erb-formatter", "~> 0.7.3", require: false
 end

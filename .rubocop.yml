@@ -1,0 +1,13 @@
+# Omakase Ruby styling for Rails
+inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+# Overwrite or add rules to create your own house style
+
+# Enable and configure layout-related cops
+# Layout/MultilineMethodCallIndentation:
+#   EnforcedStyle: indented
+
+# Layout/MultilineAssignmentLayout:
+#   EnforcedStyle: same_line
+
+# Layout/EndAlignment:
+#   EnforcedStyleAlignWith: variable
