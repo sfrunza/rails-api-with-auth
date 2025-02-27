@@ -18,7 +18,9 @@ Rails.application.configure do
   # Enable/disable Action Controller caching. By default Action Controller caching is disabled.
   # Run rails dev:cache to toggle Action Controller caching.
   if Rails.root.join("tmp/caching-dev.txt").exist?
-    config.public_file_server.headers = { "cache-control" => "public, max-age=#{2.days.to_i}" }
+    config.public_file_server.headers = {
+      "cache-control" => "public, max-age=#{2.days.to_i}"
+    }
   else
     config.action_controller.perform_caching = false
   end
@@ -74,12 +76,12 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              "smtp.gmail.com",
-    port:                 587,
-    domain:               "localhost",
-    user_name:            Rails.application.credentials.dig(:gmail, :username),
-    password:             Rails.application.credentials.dig(:gmail, :password),
-    authentication:       "plain",
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "localhost",
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_PASSWORD"],
+    authentication: "plain",
     enable_starttls_auto: true
   }
 end

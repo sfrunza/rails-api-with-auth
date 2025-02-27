@@ -1,7 +1,7 @@
 module Authentication
   extend ActiveSupport::Concern
 
-  JWT_SECRET = Rails.application.credentials.dig(:jwt_key)
+  JWT_KEY = ENV["JWT_KEY"]
 
   included { before_action :require_authentication }
 
@@ -39,7 +39,7 @@ module Authentication
 
     token = header.split(" ").last
     begin
-      decoded_token = JWT.decode(token, JWT_SECRET, true, algorithm: "HS256")
+      decoded_token = JWT.decode(token, JWT_KEY, true, algorithm: "HS256")
       Current.session ||= Session.find(decoded_token.first["session_id"])
     rescue JWT::DecodeError
       nil
@@ -74,7 +74,7 @@ module Authentication
       exp: 24.hours.from_now.to_i
     }
 
-    JWT.encode(payload, JWT_SECRET, "HS256")
+    JWT.encode(payload, JWT_KEY, "HS256")
   end
 
   def terminate_session
