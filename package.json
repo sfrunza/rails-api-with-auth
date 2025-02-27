@@ -1,7 +1,7 @@
 {
     "name": "rails_api_with_auth",
     "engines": {
-        "node": ">=20.0.0"
+        "node": ">=18.0.0"
     },
     "scripts": {
         "dev": "foreman start -f Procfile.dev",
