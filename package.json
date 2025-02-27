@@ -6,8 +6,8 @@
     "scripts": {
         "dev": "foreman start -f Procfile.dev",
         "clean": "rm -rf public",
-        "build": "cd frontend && pnpm install && pnpm run build && cd ..",
+        "build": "cd frontend && npm install && npm run build && cd ..",
         "deploy": "cp -a frontend/dist/. public/",
-        "app-postbuild": "pnpm run clean && pnpm run build && pnpm run deploy"
+        "app-postbuild": "npm run clean && npm run build && npm run deploy"
     }
 }
