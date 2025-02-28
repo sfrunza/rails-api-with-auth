@@ -97,13 +97,13 @@ production:
     url: <%= ENV['DATABASE_URL'] %>
   cache:
     <<: *primary_production
-    url: <%= ENV['DATABASE_URL'] %>
+    database: rails_api_with_auth_development_cache
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    url: <%= ENV['DATABASE_URL'] %>
+    database: rails_api_with_auth_production_queue
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    url: <%= ENV['DATABASE_URL'] %>
+    database: rails_api_with_auth_development_cable
     migrations_paths: db/cable_migrate
