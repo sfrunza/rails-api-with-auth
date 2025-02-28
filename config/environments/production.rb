@@ -3,6 +3,13 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Set the correct host
+  config.hosts << ENV["BASE_URL"]
+
+  # Allow credentials for session-based authentication
+  config.action_dispatch.cookies_same_site_protection = :none
+  config.action_dispatch.use_cookies_with_metadata = true
+
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
