@@ -8,6 +8,7 @@
         "clean": "rm -rf public",
         "build": "cd frontend && npm install && npm run build && cd ..",
         "deploy": "cp -a frontend/dist/. public/",
-        "app-postbuild": "npm run clean && npm run build && npm run deploy"
+        "app-postbuild": "npm run clean && npm run build && npm run deploy",
+        "heroku-postbuild": "npm run app-postbuild"
     }
 }
