@@ -57,7 +57,7 @@ module Authentication
         # Set both cookie and return JWT token
         cookies.signed.permanent[:session_id] = {
           value: session.id,
-          # httponly: true,
+          httponly: true,
           same_site: :strict,
           secure: Rails.env.production?
         }
