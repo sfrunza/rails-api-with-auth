@@ -7,7 +7,7 @@
   "rubyLsp.rubyVersionManager": {
     "identifier": "rvm"
   },
-  "rubyLsp.formatter": "syntax_tree",
+  "rubyLsp.formatter": "rubocop",
   "[ruby]": {
     "editor.defaultFormatter": "Shopify.ruby-lsp",
     "editor.formatOnSave": true,

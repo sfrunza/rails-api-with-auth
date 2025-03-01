@@ -1,2 +1,2 @@
 web: bin/rails s
-jobs: bin/jobs start
+worker: bin/rails jobs:work
