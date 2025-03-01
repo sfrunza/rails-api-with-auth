@@ -23,12 +23,12 @@ const items = [
   },
   {
     title: 'Dispatch',
-    url: '#',
+    url: 'dispatch',
     icon: TruckIcon
   },
   {
     title: 'Settings',
-    url: '#',
+    url: 'settings',
     icon: SettingsIcon
   },
   {

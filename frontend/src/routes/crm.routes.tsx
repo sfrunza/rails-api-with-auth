@@ -71,6 +71,14 @@ export const crmRoutes = {
     {
       path: 'requests',
       element: <div>Requests</div>
+    },
+    {
+      path: 'dispatch',
+      element: <div>Dispatch</div>
+    },
+    {
+      path: 'settings',
+      element: <div>Settings</div>
     }
     // {
     //   path: "requests/:id",
