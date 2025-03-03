@@ -14,6 +14,20 @@ export default function MovingServicesPage() {
           <ServiceList />
         </CardContent>
       </Card>
+      <Card className="max-w-xl">
+        <CardContent className="space-y-4">
+          <ServiceForm />
+          <Separator />
+          <ServiceList />
+        </CardContent>
+      </Card>
+      <Card className="max-w-xl">
+        <CardContent className="space-y-4">
+          <ServiceForm />
+          <Separator />
+          <ServiceList />
+        </CardContent>
+      </Card>
     </SettingPageWrapper>
   )
 }

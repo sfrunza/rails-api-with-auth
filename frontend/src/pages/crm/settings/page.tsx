@@ -87,6 +87,44 @@ export default function SettingsPage() {
             </NavLink>
           )
         })}
+        {navLinks.map((item, i) => {
+          return (
+            <NavLink
+              key={i}
+              to={item.href}
+              className={({ isActive }) =>
+                cn(
+                  buttonVariants({
+                    variant: isActive ? 'secondary' : 'ghost',
+                    className: 'w-full justify-start text-left'
+                  })
+                )
+              }
+            >
+              <item.icon className="size-4" />
+              {item.name}
+            </NavLink>
+          )
+        })}
+        {navLinks.map((item, i) => {
+          return (
+            <NavLink
+              key={i}
+              to={item.href}
+              className={({ isActive }) =>
+                cn(
+                  buttonVariants({
+                    variant: isActive ? 'secondary' : 'ghost',
+                    className: 'w-full justify-start text-left'
+                  })
+                )
+              }
+            >
+              <item.icon className="size-4" />
+              {item.name}
+            </NavLink>
+          )
+        })}
       </div>
     </PageContainer>
   )
