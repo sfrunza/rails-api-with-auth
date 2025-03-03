@@ -1,0 +1,6 @@
+{
+  "name": "Rails API with Auth",
+  "short_name": "Rails API with Auth",
+  "start_url": "/",
+  "display": "standalone"
+}

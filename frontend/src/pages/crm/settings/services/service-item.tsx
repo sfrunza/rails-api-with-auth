@@ -34,8 +34,8 @@ export default function ServiceItem({
     transform: CSS.Transform.toString(transform),
     transition,
     zIndex: isDragging ? 1000 : 'auto',
-    position: isDragging ? 'relative' : 'static',
-    touchAction: 'none'
+    position: isDragging ? 'relative' : 'static'
+    // touchAction: 'none'
   }
 
   return (
