@@ -4,6 +4,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: 'DMSans';
+  font-weight: 200 900;
+  font-display: block;
+  font-style: normal;
+  font-stretch: 75% 125%;
+  src: url('./assets/fonts/DMSans-VariableFont.ttf') format('truetype');
+}
+
+@theme {
+  --font-sans: 'DMSans', sans-serif;
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);

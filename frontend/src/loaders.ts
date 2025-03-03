@@ -3,7 +3,6 @@ import Cookies from "js-cookie";
 import { store } from "@/store";
 // import { settingsApi } from "@/services/settings-api";
 import { authApi } from "@/services/auth-api";
-import { setUser } from "@/slices/auth-slice";
 // import { servicesApi } from "@/services/services-api";
 // import { ratesApi } from "@/services/rates-api";
 // import { calendarRatesApi } from "@/services/calendar-rates-api";
@@ -40,17 +39,16 @@ export const verifyAuthLoader = async () => {
 
   const result = await store.dispatch(
     authApi.endpoints.verify.initiate()
-  ).unwrap();
+  )
 
   if (result.error) {
-    store.dispatch(setUser(null));
+    Cookies.remove("session_id")
     return redirect('/auth/login');
   }
 
-  // if (result.user) {
-  //   store.dispatch(setUser(result.user));
-  //   fetchAdditionalData();
-  // }
+  if (result.data) {
+    // fetchAdditionalData();
+  }
 
   return null;
 };

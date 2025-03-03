@@ -7,8 +7,8 @@ export const servicesApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Service'],
   endpoints: (builder) => ({
-    getServices: builder.query<Service[], {}>({
-      query: ({ }) => `/services`,
+    getServices: builder.query<Service[], void>({
+      query: () => `/services`,
       providesTags(result) {
         if (result) {
           return [

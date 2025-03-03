@@ -91,6 +91,7 @@ export const authApi = createApi({
 
           dispatch(setUser(response.data));
         } catch (error) {
+          dispatch(setUser(null));
           console.log("error", error);
         }
       },

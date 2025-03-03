@@ -2,17 +2,19 @@ import React from 'react'
 
 import { cn } from '@/lib/utils'
 
-import { Button } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Spinner } from '@/components/spinner'
+import { VariantProps } from 'class-variance-authority'
 
 export function LoadingButton({
   loading,
   children,
   className,
   ...rest
-}: React.ComponentProps<'button'> & {
-  loading: boolean
-}) {
+}: React.ComponentProps<'button'> &
+  VariantProps<typeof buttonVariants> & {
+    loading: boolean
+  }) {
   return (
     <Button className={cn('relative', className)} {...rest}>
       {loading && (

@@ -3,6 +3,8 @@ import { verifyAuthLoader } from '@/loaders'
 import CrmLayout from '@/layouts/crm/layout'
 import { GlobalFallback } from '@/components/global-fallback'
 import PrivateRoute from '@/components/private-route'
+import SettingsLayout from '@/pages/crm/settings/layout'
+import MovingServicesPage from '@/pages/crm/settings/services/page'
 
 // const DashboardLayout = lazy(() => import("@/layouts/dashboard/admin/layout"));
 // const DashboardRequestsPage = lazy(
@@ -78,7 +80,25 @@ export const crmRoutes = {
     },
     {
       path: 'settings',
-      element: <div>Settings</div>
+      element: <SettingsLayout />,
+      children: [
+        {
+          path: 'services',
+          element: <MovingServicesPage />
+        },
+        {
+          path: 'extra-services',
+          element: <div>Extra Services</div>
+        },
+        {
+          path: 'packing',
+          element: <div>Packing</div>
+        }
+      ]
+    },
+    {
+      path: 'messages',
+      element: <div>Messages</div>
     }
     // {
     //   path: "requests/:id",

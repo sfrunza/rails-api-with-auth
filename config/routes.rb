@@ -7,6 +7,12 @@ Rails.application.routes.draw do
         delete :destroy
       end
       resources :passwords, param: :token
+
+      resources :services, only: %i[index create destroy] do
+        collection do
+          post :bulk_update
+        end
+      end
     end
   end
 

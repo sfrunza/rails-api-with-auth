@@ -41,7 +41,7 @@ export default function MessageNotifications() {
   return (
     <div className="relative">
       <NavLink
-        to="#"
+        to="/crm/messages"
         className={({ isActive }) =>
           cn(
             buttonVariants({

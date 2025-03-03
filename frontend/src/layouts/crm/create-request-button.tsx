@@ -1,36 +1,35 @@
-// import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 import { ChevronDownIcon } from 'lucide-react'
+
 import { LoadingButton } from '@/components/loading-button'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
-  // DropdownMenuItem,
+  DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
-// import { useCreateRequestMutation } from '@/services/requests-api'
-// import { useGetServicesQuery } from '@/services/services-api'
+import { useGetServicesQuery } from '@/services/services-api'
+import { useCreateRequestMutation } from '@/services/requests-api'
 
 export function CreateRequestButton() {
-  // const navigate = useNavigate()
-  // const [createRequest, { isLoading }] = useCreateRequestMutation()
-  // const { data: services } = useGetServicesQuery({});
+  const navigate = useNavigate()
+  const [createRequest, { isLoading }] = useCreateRequestMutation()
+  const { data: services } = useGetServicesQuery()
 
-  // const enabledServices = services?.filter((service) => service.enabled);
+  const enabledServices = services?.filter((service) => service.enabled)
 
-  // async function handleCreateRequest(serviceId: number) {
-  //   const response = await createRequest({ service_id: serviceId }).unwrap()
-  //   navigate(`/dashboard/requests/${response.id}`)
-  // }
+  async function handleCreateRequest(serviceId: number) {
+    const response = await createRequest({ service_id: serviceId }).unwrap()
+    navigate(`/dashboard/requests/${response.id}`)
+  }
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <LoadingButton
-          // loading={isLoading}
-          // disabled={isLoading || enabledServices?.length === 0}
-          loading={false}
-          disabled={false}
+          loading={isLoading}
+          disabled={isLoading || enabledServices?.length === 0}
         >
           <span className="flex items-center justify-between gap-2">
             <span className="hidden md:inline-flex">Create Request</span>
@@ -41,7 +40,7 @@ export function CreateRequestButton() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuGroup>
-          {/* {enabledServices?.map((service, i) => (
+          {enabledServices?.map((service, i) => (
             <DropdownMenuItem
               key={i}
               className="cursor-pointer"
@@ -49,8 +48,7 @@ export function CreateRequestButton() {
             >
               {service.name}
             </DropdownMenuItem>
-          ))} */}
-          placeholder
+          ))}
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

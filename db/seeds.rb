@@ -7,6 +7,13 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+puts "Deleting old records..."
+
+Service.delete_all
+Session.delete_all
+User.delete_all
+
 User.create!(
   first_name: "Aurel",
   last_name: "Busuioc",
@@ -22,3 +29,70 @@ User.create!(
   password: "111111",
   role: "admin"
 )
+
+Service.create!(
+  name: "Local move",
+  enabled: true,
+  miles_setting: 150,
+  index: 0,
+  is_default: true
+)
+
+Service.create!(
+  name: "Flat Rate",
+  enabled: true,
+  miles_setting: 150,
+  index: 1,
+  is_default: true
+)
+
+Service.create!(
+  name: "Loading help",
+  enabled: true,
+  miles_setting: 0,
+  index: 2,
+  is_default: true
+)
+
+Service.create!(
+  name: "Unloading help",
+  enabled: true,
+  miles_setting: 0,
+  index: 3,
+  is_default: true
+)
+
+Service.create!(
+  name: "Inside move",
+  enabled: true,
+  miles_setting: 0,
+  index: 4,
+  is_default: true
+)
+
+Service.create!(
+  name: "Packing only",
+  enabled: true,
+  miles_setting: 0,
+  index: 5,
+  is_default: true
+)
+
+Service.create!(
+  name: "Moving & Storage",
+  enabled: true,
+  miles_setting: 0,
+  index: 6,
+  is_default: true
+)
+
+Service.create!(
+  name: "Overnight truck Storage",
+  enabled: true,
+  miles_setting: 0,
+  index: 7,
+  is_default: true
+)
+
+
+puts "Seeding complete!"
