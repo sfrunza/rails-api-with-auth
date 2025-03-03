@@ -23,11 +23,11 @@ User.create!(
 )
 
 User.create!(
-  first_name: "admin",
-  last_name: "admin",
-  email_address: "admin@mail.com",
+  first_name: "manager",
+  last_name: "manager",
+  email_address: "manager@mail.com",
   password: "111111",
-  role: "admin"
+  role: "manager"
 )
 
 Service.create!(

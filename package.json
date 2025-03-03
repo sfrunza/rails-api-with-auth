@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "foreman start -f Procfile.dev",
     "clean": "rm -rf public",
-    "build": "cd frontend && npm install --dev && npm run build",
+    "build": "cd frontend && npm install --include=dev && npm run build",
     "deploy": "cp -a frontend/dist/. public/",
     "postinstall": "npm run clean && npm run build && npm run deploy && echo 'Frontend built!'"
   }

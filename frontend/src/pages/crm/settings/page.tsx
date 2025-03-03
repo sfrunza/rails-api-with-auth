@@ -1,5 +1,5 @@
+import PageContainer from '@/components/page-container'
 import { buttonVariants } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
 import {
   CalculatorIcon,
@@ -61,12 +61,12 @@ const navLinks = [
 export default function SettingsPage() {
   const { pathname } = useLocation()
   return (
-    <ScrollArea
-      className={cn('hidden lg:block overflow-y-auto lg:border-r', {
+    <PageContainer
+      className={cn('hidden lg:block lg:border-r', {
         block: pathname === '/crm/settings'
       })}
     >
-      <h2 className="px-6 pt-6 text-lg font-semibold">Settings</h2>
+      <h2 className="px-6 pt-4 text-lg font-semibold">Settings</h2>
       <div className="space-y-2 p-4">
         {navLinks.map((item, i) => {
           return (
@@ -88,6 +88,6 @@ export default function SettingsPage() {
           )
         })}
       </div>
-    </ScrollArea>
+    </PageContainer>
   )
 }

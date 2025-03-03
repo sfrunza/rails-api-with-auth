@@ -24,6 +24,7 @@ import {
   useBulkUpdateServicesMutation,
   useGetServicesQuery
 } from '@/services/services-api'
+import { Separator } from '@/components/ui/separator'
 
 export default function ServiceList() {
   const { data: movingServices, isLoading, isError } = useGetServicesQuery()
@@ -79,7 +80,7 @@ export default function ServiceList() {
   }
 
   return (
-    <div className="mt-6 flex flex-col gap-6">
+    <div className="flex flex-col gap-6">
       {isLoading && (
         <div className="space-y-2">
           {Array.from({ length: 8 }).map((_, i) => (
@@ -108,39 +109,38 @@ export default function ServiceList() {
           </SortableContext>
         </DndContext>
       )}
-      <div className="border-t pt-4">
-        <div
-          className={cn('flex transition-opacity duration-500 sm:justify-end', {
-            'invisible opacity-0': !orderChanged,
-            'visible opacity-100': orderChanged
-          })}
-        >
-          <div className="flex min-h-9 w-full gap-4 sm:w-auto">
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full sm:w-auto"
-              onClick={() => {
-                setItems(movingServices!)
-                setOrderChanged(false)
-              }}
-            >
-              Cancel
-            </Button>
-            <LoadingButton
-              type="button"
-              className="w-full sm:w-auto"
-              disabled={isBulkUpdating}
-              loading={isBulkUpdating}
-              onClick={async () => {
-                await bulkUpdateServices({ services: items }).unwrap()
-                toast.success('Changes saved')
-                setOrderChanged(false)
-              }}
-            >
-              Save changes
-            </LoadingButton>
-          </div>
+      <Separator />
+      <div
+        className={cn('flex transition-opacity duration-500 sm:justify-end', {
+          'invisible opacity-0': !orderChanged,
+          'visible opacity-100': orderChanged
+        })}
+      >
+        <div className="flex min-h-9 w-full gap-4 sm:w-auto">
+          <Button
+            type="button"
+            variant="outline"
+            className="w-full sm:w-auto"
+            onClick={() => {
+              setItems(movingServices!)
+              setOrderChanged(false)
+            }}
+          >
+            Cancel
+          </Button>
+          <LoadingButton
+            type="button"
+            className="w-full sm:w-auto"
+            disabled={isBulkUpdating}
+            loading={isBulkUpdating}
+            onClick={async () => {
+              await bulkUpdateServices({ services: items }).unwrap()
+              toast.success('Changes saved')
+              setOrderChanged(false)
+            }}
+          >
+            Save changes
+          </LoadingButton>
         </div>
       </div>
     </div>

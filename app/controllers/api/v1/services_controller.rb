@@ -1,5 +1,5 @@
 class Api::V1::ServicesController < ApplicationController
-  include Pundit
+  include Pundit::Authorization
   allow_unauthenticated_access only: %i[index]
   before_action :set_service, only: %i[destroy]
 

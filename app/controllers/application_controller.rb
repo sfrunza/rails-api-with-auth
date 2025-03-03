@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
   include ActionController::Cookies
   include Authentication
-  include Pundit
+  include Pundit::Authorization
 
   skip_before_action :require_authentication,
                      only: %i[health_check],
