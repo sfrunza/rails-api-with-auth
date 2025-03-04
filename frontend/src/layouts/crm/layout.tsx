@@ -2,8 +2,8 @@ import { Separator } from '@/components/ui/separator'
 import {
   SidebarInset,
   SidebarProvider,
-  SidebarTrigger,
-  useSidebar
+  SidebarTrigger
+  // useSidebar
   // useSidebar
   // useSidebar
 } from '@/components/ui/sidebar'
@@ -15,8 +15,8 @@ import MessageNotifications from './message-notifications'
 // import { useIsMobile } from '@/hooks/use-mobile'
 import { ModeToggle } from '@/components/mode-toggle'
 import Cookies from 'js-cookie'
-import { useIsMobile } from '@/hooks/use-mobile'
-import { cn } from '@/lib/utils'
+// import { useIsMobile } from '@/hooks/use-mobile'
+// import { cn } from '@/lib/utils'
 // import DialogProvider from '@/components/dialog-provider'
 // import { useIsMobile } from '@/hooks/use-mobile'
 // import { cn } from '@/lib/utils'
@@ -32,11 +32,11 @@ export default function CrmLayout() {
 }
 
 function CrmMain() {
-  const { state } = useSidebar()
-  const isMobile = useIsMobile()
+  // const { state } = useSidebar()
+  // const isMobile = useIsMobile()
   return (
     <SidebarInset>
-      <div
+      {/* <div
         className={cn(
           'fixed left-0 right-0 top-0 z-10 h-full min-h-svh overflow-hidden bg-background',
           {
@@ -47,29 +47,25 @@ function CrmMain() {
               !isMobile && state === 'collapsed'
           }
         )}
-      >
-        <header
-          className={cn(
-            'z-50 flex h-16 w-full items-center gap-2 border-b bg-background px-4'
-          )}
-        >
-          <div className="flex w-full justify-between">
-            <div className="flex items-center gap-2">
-              <SidebarTrigger className="-ml-1" />
-              <Separator orientation="vertical" className="mr-2 h-4" />
-              <CreateRequestButton />
-              <GlobalSearch />
-            </div>
-            <div className="flex items-center gap-2">
-              <MessageNotifications />
-              <ModeToggle />
-            </div>
+      > */}
+      <header className="z-50 flex h-16 w-full items-center border-b bg-background px-4">
+        <div className="flex w-full justify-between">
+          <div className="flex items-center gap-2">
+            <SidebarTrigger className="-ml-1" />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            <CreateRequestButton />
+            <GlobalSearch />
           </div>
-        </header>
-        <div className="z-0 h-[calc(100svh-4rem)] overflow-hidden">
-          <Outlet />
+          <div className="flex items-center gap-2">
+            <MessageNotifications />
+            <ModeToggle />
+          </div>
         </div>
+      </header>
+      <div className="h-[calc(100svh-4rem)] overflow-hidden">
+        <Outlet />
       </div>
+      {/* </div> */}
     </SidebarInset>
   )
 }
