@@ -1,13 +1,14 @@
 import { createBrowserRouter, Link, RouterProvider } from 'react-router'
+import { Provider } from 'react-redux'
 import { Toaster } from 'sonner'
 import { store } from '@/store'
 import { authRoutes } from '@/routes/auth.routes'
-import { crmRoutes } from './routes/crm.routes'
+import { crmRoutes } from '@/routes/crm.routes'
 import ErrorPage from '@/pages/error/page'
 import AccountPage from '@/pages/account/page'
 import { ThemeProvider } from '@/components/theme-provider'
-import { Provider } from 'react-redux'
-import CrmLayout from './layouts/crm/layout'
+import CrmLayout from '@/layouts/crm/layout'
+import DialogProvider from '@/components/dialog-provider'
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,7 @@ export default function App() {
           richColors
           // closeButton
         />
+        <DialogProvider />
       </ThemeProvider>
     </Provider>
   )
