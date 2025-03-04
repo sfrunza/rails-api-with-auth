@@ -46,25 +46,25 @@ function CrmMain() {
         )}
       > */}
       {/* "z-50 flex h-16 w-full items-center gap-2 border-b bg-background px-4", */}
-      <div className="h-screen overflow-hidden grid-cols-[auto_1fr]">
-        <header className="flex z-50 bg-background h-16 shrink-0 items-center gap-2 border-b px-4">
-          <div className="flex w-full justify-between">
-            <div className="flex items-center gap-2">
-              <SidebarTrigger className="-ml-1" />
-              <Separator orientation="vertical" className="mr-2 h-4" />
-              <CreateRequestButton />
-              <GlobalSearch />
-            </div>
-            <div className="flex items-center gap-2">
-              <MessageNotifications />
-              <ModeToggle />
-            </div>
+      {/* <div className="h-screen overflow-hidden grid-cols-[auto_1fr]"> */}
+      <header className="flex z-50 bg-background fixed top-0 w-full h-16 shrink-0 items-center gap-2 border-b px-4">
+        <div className="flex w-full justify-between">
+          <div className="flex items-center gap-2">
+            <SidebarTrigger className="-ml-1" />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            <CreateRequestButton />
+            <GlobalSearch />
           </div>
-        </header>
-        <div className="bg-blue-200 overflow-y-auto h-[calc(100vh-4rem)]">
-          <Outlet />
+          <div className="flex items-center gap-2">
+            <MessageNotifications />
+            <ModeToggle />
+          </div>
         </div>
+      </header>
+      <div className="bg-blue-200 mt-16 overflow-y-auto h-[calc(100vh-4rem)]">
+        <Outlet />
       </div>
+      {/* </div> */}
     </SidebarInset>
   )
 }

@@ -9,6 +9,6 @@
     "clean": "rm -rf public",
     "build": "cd frontend && npm install --include=dev && npm run build",
     "deploy": "cp -a frontend/dist/. public/",
-    "postinstall": "npm run clean && npm run build && npm run deploy && echo 'Frontend built!'"
+    "heroku-postbuild": "npm run clean && npm run deploy && echo 'Frontend built!'"
   }
 }
