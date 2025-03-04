@@ -61,7 +61,7 @@ function CrmMain() {
             </div>
           </div>
         </header>
-        <div className="bg-blue-200 pb-10 h-full flex-1 overflow-y-auto">
+        <div className="bg-blue-200 overflow-y-auto h-[calc(100vh-4rem)]">
           <Outlet />
         </div>
       </div>

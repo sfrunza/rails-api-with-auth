@@ -63,7 +63,7 @@ export default function SettingsPage() {
   return (
     <aside
       className={cn(
-        'hidden bg-pink-200 p-2 overflow-y-auto h-[calc(100vh-4rem)] sticky top-0 lg:block lg:border-r',
+        'hidden bg-pink-200 p-2 overflow-y-auto h-full lg:block lg:border-r',
         {
           block: pathname === '/crm/settings'
         }
