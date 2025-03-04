@@ -1,4 +1,4 @@
-import PageContainer from '@/components/page-container'
+// import PageContainer from '@/components/page-container'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import {
@@ -61,71 +61,76 @@ const navLinks = [
 export default function SettingsPage() {
   const { pathname } = useLocation()
   return (
-    <PageContainer
-      className={cn('hidden lg:block lg:border-r', {
-        block: pathname === '/crm/settings'
-      })}
+    <aside
+      className={cn(
+        'hidden bg-pink-200 p-2 overflow-y-auto h-[calc(100vh-4rem)] sticky top-0 lg:block lg:border-r',
+        {
+          block: pathname === '/crm/settings'
+        }
+      )}
     >
-      <h2 className="px-6 pt-4 text-lg font-semibold">Settings</h2>
-      <div className="space-y-2 p-4">
-        {navLinks.map((item, i) => {
-          return (
-            <NavLink
-              key={i}
-              to={item.href}
-              className={({ isActive }) =>
-                cn(
-                  buttonVariants({
-                    variant: isActive ? 'secondary' : 'ghost',
-                    className: 'w-full justify-start text-left'
-                  })
-                )
-              }
-            >
-              <item.icon className="size-4" />
-              {item.name}
-            </NavLink>
-          )
-        })}
-        {navLinks.map((item, i) => {
-          return (
-            <NavLink
-              key={i}
-              to={item.href}
-              className={({ isActive }) =>
-                cn(
-                  buttonVariants({
-                    variant: isActive ? 'secondary' : 'ghost',
-                    className: 'w-full justify-start text-left'
-                  })
-                )
-              }
-            >
-              <item.icon className="size-4" />
-              {item.name}
-            </NavLink>
-          )
-        })}
-        {navLinks.map((item, i) => {
-          return (
-            <NavLink
-              key={i}
-              to={item.href}
-              className={({ isActive }) =>
-                cn(
-                  buttonVariants({
-                    variant: isActive ? 'secondary' : 'ghost',
-                    className: 'w-full justify-start text-left'
-                  })
-                )
-              }
-            >
-              <item.icon className="size-4" />
-              {item.name}
-            </NavLink>
-          )
-        })}
+      <div className="p-4 bg-green-200">
+        <h2 className="px-6 pt-4 text-lg font-semibold">Settings</h2>
+        <div className="space-y-2 p-4">
+          {navLinks.map((item, i) => {
+            return (
+              <NavLink
+                key={i}
+                to={item.href}
+                className={({ isActive }) =>
+                  cn(
+                    buttonVariants({
+                      variant: isActive ? 'secondary' : 'ghost',
+                      className: 'w-full justify-start text-left'
+                    })
+                  )
+                }
+              >
+                <item.icon className="size-4" />
+                {item.name}
+              </NavLink>
+            )
+          })}
+          {navLinks.map((item, i) => {
+            return (
+              <NavLink
+                key={i}
+                to={item.href}
+                className={({ isActive }) =>
+                  cn(
+                    buttonVariants({
+                      variant: isActive ? 'secondary' : 'ghost',
+                      className: 'w-full justify-start text-left'
+                    })
+                  )
+                }
+              >
+                <item.icon className="size-4" />
+                {item.name}
+              </NavLink>
+            )
+          })}
+          {navLinks.map((item, i) => {
+            return (
+              <NavLink
+                key={i}
+                to={item.href}
+                className={({ isActive }) =>
+                  cn(
+                    buttonVariants({
+                      variant: isActive ? 'secondary' : 'ghost',
+                      className: 'w-full justify-start text-left'
+                    })
+                  )
+                }
+              >
+                <item.icon className="size-4" />
+                {item.name}
+              </NavLink>
+            )
+          })}
+        </div>
       </div>
-    </PageContainer>
+    </aside>
   )
 }
