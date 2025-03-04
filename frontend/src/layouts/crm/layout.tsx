@@ -38,7 +38,7 @@ function CrmMain() {
     <SidebarInset>
       <div
         className={cn(
-          'fixed left-0 right-0 top-0 z-10 h-full min-h-screen overflow-hidden bg-background',
+          'fixed left-0 right-0 top-0 z-10 h-full min-h-svh overflow-hidden bg-background',
           {
             'transition-[left,right,width] duration-200 ease-linear': !isMobile,
             'left-[var(--sidebar-width)] w-[calc(100%-var(--sidebar-width))]':
@@ -66,7 +66,7 @@ function CrmMain() {
             </div>
           </div>
         </header>
-        <div className="z-0 h-[calc(100vh-64px)] overflow-hidden pb-24 md:pb-0">
+        <div className="z-0 h-[calc(100svh-4rem)] overflow-hidden">
           <Outlet />
         </div>
       </div>
