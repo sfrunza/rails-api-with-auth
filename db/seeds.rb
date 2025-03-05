@@ -12,6 +12,7 @@ puts "Deleting old records..."
 
 Service.delete_all
 Packing.delete_all
+Rate.delete_all
 Truck.delete_all
 Session.delete_all
 User.delete_all
@@ -96,11 +97,11 @@ Service.create!(
   is_default: true
 )
 
-# Rate.create(name: "Discount", color: "#000000", enable: true)
-# Rate.create(name: "Regular", color: "#000000", enable: true)
-# Rate.create(name: "Subpeak", color: "#000000", enable: true)
-# Rate.create(name: "Peak", color: "#000000", enable: true)
-# Rate.create(name: "High Peak", color: "#000000", enable: true)
+Rate.create(name: "Discount", color: "#00a455", enable: true)
+Rate.create(name: "Regular", color: "#0044ff", enable: true)
+Rate.create(name: "Subpeak", color: "#ffa500", enable: true)
+Rate.create(name: "Peak", color: "#ff5400", enable: true)
+Rate.create(name: "High Peak", color: "#fb0009", enable: true)
 
 Truck.create(name: "18 FT")
 Truck.create(name: "20 FT")

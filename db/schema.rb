@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_05_200407) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_05_204355) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -30,6 +30,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_05_200407) do
     t.boolean "is_default", default: false
     t.integer "labor_increase"
     t.integer "index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rates", force: :cascade do |t|
+    t.integer "extra_mover_rate"
+    t.integer "extra_truck_rate"
+    t.boolean "enable"
+    t.string "name"
+    t.string "color"
+    t.jsonb "movers_rates", default: {"2"=>{"hourly_rate"=>10000}, "3"=>{"hourly_rate"=>10000}, "4"=>{"hourly_rate"=>10000}, "5"=>{"hourly_rate"=>10000}, "6"=>{"hourly_rate"=>10000}, "7"=>{"hourly_rate"=>10000}, "8"=>{"hourly_rate"=>10000}, "9"=>{"hourly_rate"=>10000}, "10"=>{"hourly_rate"=>10000}}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
