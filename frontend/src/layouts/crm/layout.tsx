@@ -1,25 +1,16 @@
+import { Outlet } from 'react-router'
+import Cookies from 'js-cookie'
 import { Separator } from '@/components/ui/separator'
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger
-  // useSidebar
-  // useSidebar
-  // useSidebar
 } from '@/components/ui/sidebar'
-import { Outlet } from 'react-router'
+import { ModeToggle } from '@/components/mode-toggle'
 import { AppSidebar } from './app-sidebar'
 import { CreateRequestButton } from './create-request-button'
 import { GlobalSearch } from './global-search'
 import MessageNotifications from './message-notifications'
-// import { useIsMobile } from '@/hooks/use-mobile'
-import { ModeToggle } from '@/components/mode-toggle'
-import Cookies from 'js-cookie'
-// import { useIsMobile } from '@/hooks/use-mobile'
-// import { cn } from '@/lib/utils'
-// import DialogProvider from '@/components/dialog-provider'
-// import { useIsMobile } from '@/hooks/use-mobile'
-// import { cn } from '@/lib/utils'
 
 export default function CrmLayout() {
   const defaultOpen = Cookies.get('sidebar_state') !== 'false'
@@ -32,22 +23,8 @@ export default function CrmLayout() {
 }
 
 function CrmMain() {
-  // const { state } = useSidebar()
-  // const isMobile = useIsMobile()
   return (
     <SidebarInset>
-      {/* <div
-        className={cn(
-          'fixed left-0 right-0 top-0 z-10 h-full min-h-svh overflow-hidden bg-background',
-          {
-            'transition-[left,right,width] duration-200 ease-linear': !isMobile,
-            'left-[var(--sidebar-width)] w-[calc(100%-var(--sidebar-width))]':
-              !isMobile && state === 'expanded',
-            'left-[var(--sidebar-width-icon)] w-[calc(100%-var(--sidebar-width-icon))]':
-              !isMobile && state === 'collapsed'
-          }
-        )}
-      > */}
       <header className="z-50 flex h-16 w-full items-center border-b bg-background px-4">
         <div className="flex w-full justify-between">
           <div className="flex items-center gap-2">
@@ -65,7 +42,6 @@ function CrmMain() {
       <div className="h-[calc(100svh-4rem)] overflow-hidden">
         <Outlet />
       </div>
-      {/* </div> */}
     </SidebarInset>
   )
 }

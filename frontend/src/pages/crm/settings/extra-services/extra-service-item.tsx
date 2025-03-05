@@ -1,26 +1,30 @@
 import { CSSProperties } from 'react';
+
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVerticalIcon, TrashIcon } from 'lucide-react';
-import { toast } from 'sonner';
 
-import { cn } from '@/lib/utils';
-import { useDeleteServiceMutation } from '@/services/services-api';
+import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
+import { cn } from '@/lib/utils';
+import { type ExtraService } from '@/types/extra-service';
 import { LoadingButton } from '@/components/loading-button';
-import { Service } from '@/types/service';
+import { useDeleteExtraServiceMutation } from '@/services/extra-services-api';
+import { toast } from 'sonner';
+import { PriceInput } from '@/components/ui/price-input';
 import { Button } from '@/components/ui/button';
 
-export default function ServiceItem({
+export default function ExtraServiceItem({
   id,
   item,
-  onEnabledChange,
+  onChange,
 }: {
   id: number;
-  item: Service;
-  onEnabledChange: (index: number, value: boolean) => void;
+  item: ExtraService;
+  onChange: (itemId: number, value: Partial<ExtraService>) => void;
 }) {
-  const [deleteService, { isLoading: isDeleting }] = useDeleteServiceMutation();
+  const [deleteExtraService, { isLoading: isDeleting }] =
+    useDeleteExtraServiceMutation();
   const {
     attributes,
     listeners,
@@ -42,9 +46,9 @@ export default function ServiceItem({
       ref={setNodeRef}
       style={style}
       className={cn(
-        'grid grid-cols-[max-content_1fr_max-content_max-content] border rounded-md items-center gap-2 p-2',
+        'grid grid-cols-[max-content_3fr_1fr_1fr_1fr] items-center gap-4 p-2',
         {
-          'bg-background shadow-lg': isDragging,
+          'bg-background': isDragging,
         }
       )}
     >
@@ -57,32 +61,46 @@ export default function ServiceItem({
       >
         <GripVerticalIcon />
       </Button>
-      <div className="overflow-hidden">
-        <p className="truncate text-sm font-medium">{item.name}</p>
-      </div>
+      <Input
+        value={item.name}
+        onChange={(e) => {
+          const value = e.target.value;
+          onChange(item.id, { name: value });
+        }}
+        name={item.name}
+      />
+
+      <PriceInput
+        value={item.price}
+        onValueChange={(val) => {
+          onChange(item.id, {
+            price: val,
+          });
+        }}
+      />
       <Switch
         checked={item.enabled}
         onCheckedChange={(val) => {
-          onEnabledChange(item.id, val);
+          onChange(item.id, { enabled: val });
         }}
       />
-      {!item.is_default ? (
+      <div className="flex justify-end">
         <LoadingButton
-          loading={isDeleting}
           disabled={isDeleting}
+          loading={isDeleting}
           variant="ghost"
-          size="icon"
           className="hover:text-red-600"
           onClick={async () => {
-            await deleteService({ id: item.id }).unwrap();
+            await deleteExtraService({ id: item.id }).unwrap();
             toast.success(`${item.name} successfully deleted`);
           }}
         >
-          <TrashIcon />
+          <span className="flex gap-2">
+            <TrashIcon className="size-4" />
+            Delete
+          </span>
         </LoadingButton>
-      ) : (
-        <div className="size-9" />
-      )}
+      </div>
     </div>
   );
 }

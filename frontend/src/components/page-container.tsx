@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 type PageContainerProps = {
   children: React.ReactNode;
@@ -8,5 +8,7 @@ export default function PageContainer({
   children,
   className,
 }: PageContainerProps) {
-  return <div className={cn("overflow-y-auto", className)}>{children}</div>;
+  return (
+    <div className={cn('overflow-y-auto pb-6', className)}>{children}</div>
+  );
 }

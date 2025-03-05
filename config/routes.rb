@@ -13,6 +13,12 @@ Rails.application.routes.draw do
           post :bulk_update
         end
       end
+
+      resources :extra_services, only: %i[index create destroy] do
+        collection do
+          post :bulk_update
+        end
+      end
     end
   end
 

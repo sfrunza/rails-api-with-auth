@@ -5,7 +5,7 @@ class Api::V1::ServicesController < ApplicationController
 
   # GET /services
   def index
-    @services = Service.order(:index)
+    @services = Service.all.order(:index)
 
     render json: @services
   end

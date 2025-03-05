@@ -1,4 +1,5 @@
-import { useRouteError } from "react-router";
+import { Button } from '@/components/ui/button';
+import { Link, useRouteError } from 'react-router';
 
 type Error = {
   statusText?: string;
@@ -17,6 +18,9 @@ export default function ErrorPage() {
         {(error as Error)?.message ||
           (error as { statusText?: string })?.statusText}
       </p>
+      <Link to="/">
+        <Button variant="outline">Home page</Button>
+      </Link>
     </div>
   );
 }

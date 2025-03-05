@@ -1,64 +1,64 @@
-import { useEffect, useState } from 'react'
-import { toast } from 'sonner'
+import { LoadingButton } from '@/components/loading-button';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
+import { Skeleton } from '@/components/ui/skeleton';
+import { cn } from '@/lib/utils';
+import {
+  useBulkUpdateServicesMutation,
+  useGetServicesQuery,
+} from '@/services/services-api';
+import { Service } from '@/types/service';
 import {
   DndContext,
   KeyboardSensor,
   PointerSensor,
   closestCenter,
   useSensor,
-  useSensors
-} from '@dnd-kit/core'
-import { restrictToParentElement } from '@dnd-kit/modifiers'
+  useSensors,
+} from '@dnd-kit/core';
+import { restrictToParentElement } from '@dnd-kit/modifiers';
 import {
   SortableContext,
   arrayMove,
-  sortableKeyboardCoordinates
-} from '@dnd-kit/sortable'
-import { cn } from '@/lib/utils'
-import { LoadingButton } from '@/components/loading-button'
-import { Button } from '@/components/ui/button'
-import { Service } from '@/types/service'
-import ServiceItem from './service-item'
-import { Skeleton } from '@/components/ui/skeleton'
-import {
-  useBulkUpdateServicesMutation,
-  useGetServicesQuery
-} from '@/services/services-api'
-import { Separator } from '@/components/ui/separator'
+  sortableKeyboardCoordinates,
+} from '@dnd-kit/sortable';
+import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
+import ServiceItem from './service-item';
 
 export default function ServiceList() {
-  const { data: movingServices, isLoading, isError } = useGetServicesQuery()
+  const { data: movingServices, isLoading, isError } = useGetServicesQuery();
   const [bulkUpdateServices, { isLoading: isBulkUpdating }] =
-    useBulkUpdateServicesMutation()
+    useBulkUpdateServicesMutation();
 
-  const [items, setItems] = useState<Service[]>([])
-  const [orderChanged, setOrderChanged] = useState<boolean>(false)
+  const [items, setItems] = useState<Service[]>([]);
+  const [orderChanged, setOrderChanged] = useState<boolean>(false);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates
+      coordinateGetter: sortableKeyboardCoordinates,
     })
-  )
+  );
 
   useEffect(() => {
     if (movingServices) {
-      setItems(movingServices)
+      setItems(movingServices);
     }
-  }, [movingServices])
+  }, [movingServices]);
 
   function handleDragEnd(event: any) {
-    const { active, over } = event
+    const { active, over } = event;
     if (over && active.id !== over.id) {
-      const oldIndex = items.findIndex((item) => item.id === active.id)
-      const newIndex = items.findIndex((item) => item.id === over.id)
-      const newItems = arrayMove(items, oldIndex, newIndex)
+      const oldIndex = items.findIndex((item) => item.id === active.id);
+      const newIndex = items.findIndex((item) => item.id === over.id);
+      const newItems = arrayMove(items, oldIndex, newIndex);
       const updatedItems = newItems.map((item, index) => ({
         ...item,
-        index
-      }))
-      setItems(updatedItems)
-      setOrderChanged(true)
+        index,
+      }));
+      setItems(updatedItems);
+      setOrderChanged(true);
     }
   }
 
@@ -66,9 +66,9 @@ export default function ServiceList() {
     setItems((prev: Service[]) => {
       return prev.map((item) =>
         item.id === itemId ? { ...item, enabled: value } : item
-      )
-    })
-    setOrderChanged(true)
+      );
+    });
+    setOrderChanged(true);
   }
 
   if (isError) {
@@ -76,7 +76,7 @@ export default function ServiceList() {
       <div className="flex w-full items-center justify-center text-muted-foreground">
         <p>Failed to fetch services</p>
       </div>
-    )
+    );
   }
 
   return (
@@ -113,7 +113,7 @@ export default function ServiceList() {
       <div
         className={cn('flex transition-opacity duration-500 sm:justify-end', {
           'invisible opacity-0': !orderChanged,
-          'visible opacity-100': orderChanged
+          'visible opacity-100': orderChanged,
         })}
       >
         <div className="flex min-h-9 w-full gap-4 sm:w-auto">
@@ -122,8 +122,8 @@ export default function ServiceList() {
             variant="outline"
             className="w-full sm:w-auto"
             onClick={() => {
-              setItems(movingServices!)
-              setOrderChanged(false)
+              setItems(movingServices!);
+              setOrderChanged(false);
             }}
           >
             Cancel
@@ -134,9 +134,9 @@ export default function ServiceList() {
             disabled={isBulkUpdating}
             loading={isBulkUpdating}
             onClick={async () => {
-              await bulkUpdateServices({ services: items }).unwrap()
-              toast.success('Changes saved')
-              setOrderChanged(false)
+              await bulkUpdateServices({ services: items }).unwrap();
+              toast.success('Changes saved');
+              setOrderChanged(false);
             }}
           >
             Save changes
@@ -144,5 +144,5 @@ export default function ServiceList() {
         </div>
       </div>
     </div>
-  )
+  );
 }

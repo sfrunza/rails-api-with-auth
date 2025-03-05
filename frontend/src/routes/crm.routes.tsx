@@ -5,6 +5,7 @@ import { GlobalFallback } from '@/components/global-fallback'
 import PrivateRoute from '@/components/private-route'
 import SettingsLayout from '@/pages/crm/settings/layout'
 import MovingServicesPage from '@/pages/crm/settings/services/page'
+import ExtraServicesPage from '@/pages/crm/settings/extra-services/page'
 
 // const DashboardLayout = lazy(() => import("@/layouts/dashboard/admin/layout"));
 // const DashboardRequestsPage = lazy(
@@ -88,7 +89,7 @@ export const crmRoutes = {
         },
         {
           path: 'extra-services',
-          element: <div>Extra Services</div>
+          element: <ExtraServicesPage />
         },
         {
           path: 'packing',

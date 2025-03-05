@@ -1,4 +1,4 @@
-// import PageContainer from '@/components/page-container'
+import { NavLink, useLocation } from 'react-router'
 import PageContainer from '@/components/page-container'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -13,7 +13,6 @@ import {
   TruckIcon,
   UserRoundCogIcon
 } from 'lucide-react'
-import { NavLink, useLocation } from 'react-router'
 
 const navLinks = [
   {
@@ -69,44 +68,6 @@ export default function SettingsPage() {
     >
       <h2 className="px-6 pt-4 text-lg font-semibold">Settings</h2>
       <div className="space-y-2 p-4">
-        {navLinks.map((item, i) => {
-          return (
-            <NavLink
-              key={i}
-              to={item.href}
-              className={({ isActive }) =>
-                cn(
-                  buttonVariants({
-                    variant: isActive ? 'secondary' : 'ghost',
-                    className: 'w-full justify-start text-left'
-                  })
-                )
-              }
-            >
-              <item.icon className="size-4" />
-              {item.name}
-            </NavLink>
-          )
-        })}
-        {navLinks.map((item, i) => {
-          return (
-            <NavLink
-              key={i}
-              to={item.href}
-              className={({ isActive }) =>
-                cn(
-                  buttonVariants({
-                    variant: isActive ? 'secondary' : 'ghost',
-                    className: 'w-full justify-start text-left'
-                  })
-                )
-              }
-            >
-              <item.icon className="size-4" />
-              {item.name}
-            </NavLink>
-          )
-        })}
         {navLinks.map((item, i) => {
           return (
             <NavLink
