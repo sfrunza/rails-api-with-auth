@@ -106,7 +106,7 @@ export default function ExtraServiceList() {
             modifiers={[restrictToParentElement]}
           >
             <SortableContext items={items}>
-              <div className="my-6 min-w-[700px] space-y-2">
+              <div className="pt-4 min-w-[700px] space-y-2">
                 {items.map((item) => (
                   <ExtraServiceItem
                     key={item.id}
