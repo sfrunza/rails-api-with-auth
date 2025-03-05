@@ -7,7 +7,7 @@ export const calendarRatesApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['CalendarRate'],
   endpoints: (builder) => ({
-    getCalendarRates: builder.query<CalendarRateMap, {}>({
+    getCalendarRates: builder.query<CalendarRateMap, void>({
       query: () => "/calendar_rates",
       providesTags: (result) => {
         if (result) {

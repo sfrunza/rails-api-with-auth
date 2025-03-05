@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_05_204355) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_05_214530) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
+
+  create_table "calendar_rates", force: :cascade do |t|
+    t.date "date"
+    t.boolean "enable_automation"
+    t.boolean "enable_auto_booking"
+    t.boolean "is_blocked"
+    t.bigint "rate_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["date"], name: "index_calendar_rates_on_date"
+    t.index ["rate_id"], name: "index_calendar_rates_on_rate_id"
+  end
 
   create_table "extra_services", force: :cascade do |t|
     t.string "name"
@@ -87,5 +99,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_05_204355) do
     t.index ["phone"], name: "index_users_on_phone", opclass: :gin_trgm_ops, using: :gin
   end
 
+  add_foreign_key "calendar_rates", "rates"
   add_foreign_key "sessions", "users"
 end
