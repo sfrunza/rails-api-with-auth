@@ -1,6 +1,5 @@
 class Api::V1::PackingsController < ApplicationController
   include Pundit::Authorization
-  allow_unauthenticated_access only: %i[index]
   before_action :set_packing, only: %i[update destroy]
 
   # GET /packings

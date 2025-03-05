@@ -11,6 +11,8 @@
 puts "Deleting old records..."
 
 Service.delete_all
+Packing.delete_all
+Truck.delete_all
 Session.delete_all
 User.delete_all
 
@@ -100,8 +102,8 @@ Service.create!(
 # Rate.create(name: "Peak", color: "#000000", enable: true)
 # Rate.create(name: "High Peak", color: "#000000", enable: true)
 
-# Truck.create(name: "18 FT")
-# Truck.create(name: "20 FT")
+Truck.create(name: "18 FT")
+Truck.create(name: "20 FT")
 
 Packing.create(
   name: "I will pack by myself",

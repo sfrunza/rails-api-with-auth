@@ -13,4 +13,8 @@ class TruckPolicy < ApplicationPolicy
   def bulk_update?
     user.admin?
   end
+
+  def destroy?
+    user.admin?
+  end
 end

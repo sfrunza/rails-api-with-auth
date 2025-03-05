@@ -19,6 +19,10 @@ Rails.application.routes.draw do
       resources :packings, only: %i[index update create destroy] do
         collection { post :bulk_update }
       end
+
+      resources :trucks, only: %i[index create destroy] do
+        collection { post :bulk_update }
+      end
     end
   end
 

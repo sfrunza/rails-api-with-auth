@@ -6,11 +6,11 @@ class ServicePolicy < ApplicationPolicy
     @service = service
   end
 
-  def bulk_update?
+  def create?
     user.admin?
   end
 
-  def create?
+  def bulk_update?
     user.admin?
   end
 
