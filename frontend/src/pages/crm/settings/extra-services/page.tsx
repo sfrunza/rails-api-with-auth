@@ -10,7 +10,7 @@ export default function ExtraServicesPage() {
         <CardHeader className="flex flex-row items-center">
           <ExtraServiceForm />
         </CardHeader>
-        <CardContent className="p-4">
+        <CardContent>
           <ExtraServiceList />
         </CardContent>
       </Card>

@@ -9,15 +9,15 @@ Rails.application.routes.draw do
       resources :passwords, param: :token
 
       resources :services, only: %i[index create destroy] do
-        collection do
-          post :bulk_update
-        end
+        collection { post :bulk_update }
       end
 
       resources :extra_services, only: %i[index create destroy] do
-        collection do
-          post :bulk_update
-        end
+        collection { post :bulk_update }
+      end
+
+      resources :packings, only: %i[index update create destroy] do
+        collection { post :bulk_update }
       end
     end
   end

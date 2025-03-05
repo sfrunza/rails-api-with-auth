@@ -1,11 +1,12 @@
-import { Navigate } from 'react-router'
-import { verifyAuthLoader } from '@/loaders'
-import CrmLayout from '@/layouts/crm/layout'
-import { GlobalFallback } from '@/components/global-fallback'
-import PrivateRoute from '@/components/private-route'
-import SettingsLayout from '@/pages/crm/settings/layout'
-import MovingServicesPage from '@/pages/crm/settings/services/page'
-import ExtraServicesPage from '@/pages/crm/settings/extra-services/page'
+import { Navigate } from 'react-router';
+import { verifyAuthLoader } from '@/loaders';
+import CrmLayout from '@/layouts/crm/layout';
+import { GlobalFallback } from '@/components/global-fallback';
+import PrivateRoute from '@/components/private-route';
+import SettingsLayout from '@/pages/crm/settings/layout';
+import MovingServicesPage from '@/pages/crm/settings/services/page';
+import ExtraServicesPage from '@/pages/crm/settings/extra-services/page';
+import PackingPage from '@/pages/crm/settings/packing/page';
 
 // const DashboardLayout = lazy(() => import("@/layouts/dashboard/admin/layout"));
 // const DashboardRequestsPage = lazy(
@@ -69,15 +70,15 @@ export const crmRoutes = {
   children: [
     {
       index: true,
-      element: <Navigate to="/crm/requests" replace />
+      element: <Navigate to="/crm/requests" replace />,
     },
     {
       path: 'requests',
-      element: <div>Requests</div>
+      element: <div>Requests</div>,
     },
     {
       path: 'dispatch',
-      element: <div>Dispatch</div>
+      element: <div>Dispatch</div>,
     },
     {
       path: 'settings',
@@ -85,22 +86,22 @@ export const crmRoutes = {
       children: [
         {
           path: 'services',
-          element: <MovingServicesPage />
+          element: <MovingServicesPage />,
         },
         {
           path: 'extra-services',
-          element: <ExtraServicesPage />
+          element: <ExtraServicesPage />,
         },
         {
           path: 'packing',
-          element: <div>Packing</div>
-        }
-      ]
+          element: <PackingPage />,
+        },
+      ],
     },
     {
       path: 'messages',
-      element: <div>Messages</div>
-    }
+      element: <div>Messages</div>,
+    },
     // {
     //   path: "requests/:id",
     //   // element: <RequestLayout />,
@@ -201,5 +202,5 @@ export const crmRoutes = {
     //     },
     //   ],
     // },
-  ]
-}
+  ],
+};

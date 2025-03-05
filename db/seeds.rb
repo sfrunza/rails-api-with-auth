@@ -94,5 +94,37 @@ Service.create!(
   is_default: true
 )
 
+# Rate.create(name: "Discount", color: "#000000", enable: true)
+# Rate.create(name: "Regular", color: "#000000", enable: true)
+# Rate.create(name: "Subpeak", color: "#000000", enable: true)
+# Rate.create(name: "Peak", color: "#000000", enable: true)
+# Rate.create(name: "High Peak", color: "#000000", enable: true)
+
+# Truck.create(name: "18 FT")
+# Truck.create(name: "20 FT")
+
+Packing.create(
+  name: "I will pack by myself",
+  description: "This is some description.",
+  is_default: true,
+  labor_increase: 0,
+  index: 0
+)
+
+Packing.create(
+  name: "I need Partial Packing Help",
+  description: "This is some description.",
+  is_default: false,
+  labor_increase: 25,
+  index: 1
+)
+
+Packing.create(
+  name: "I need Full Packing Service",
+  description: "This is some description.",
+  is_default: false,
+  labor_increase: 50,
+  index: 2
+)
 
 puts "Seeding complete!"

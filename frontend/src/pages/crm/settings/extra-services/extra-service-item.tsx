@@ -88,14 +88,13 @@ export default function ExtraServiceItem({
         <LoadingButton
           disabled={isDeleting}
           loading={isDeleting}
-          variant="ghost"
-          className="hover:text-red-600"
+          variant="secondary"
           onClick={async () => {
             await deleteExtraService({ id: item.id }).unwrap();
             toast.success(`${item.name} successfully deleted`);
           }}
         >
-          <span className="flex gap-2">
+          <span className="flex items-center gap-2">
             <TrashIcon className="size-4" />
             Delete
           </span>

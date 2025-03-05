@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_04_231846) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_05_145144) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -19,6 +19,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_04_231846) do
     t.string "name"
     t.integer "price"
     t.boolean "enabled", default: true
+    t.integer "index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "packings", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.boolean "is_default", default: false
+    t.integer "labor_increase"
     t.integer "index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

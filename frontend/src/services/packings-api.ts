@@ -25,7 +25,7 @@ export const packingsApi = createApi({
         method: 'PATCH',
         body: { packing: patch },
       }),
-      invalidatesTags: (_, __, { id }) => [{ type: 'Packing', id: 'LIST' }, { type: 'Packing', id }],
+      invalidatesTags: (_, error) => error ? [] : [{ type: 'Packing', id: "LIST" }],
     }),
     createPacking: builder.mutation<Packing, Partial<Packing>>({
       query: (packing) => ({
@@ -35,24 +35,23 @@ export const packingsApi = createApi({
           packing: packing,
         },
       }),
-      invalidatesTags: [{ type: 'Packing', id: 'LIST' }],
+      invalidatesTags: (_, error) => error ? [] : [{ type: 'Packing', id: 'LIST' }],
     }),
     bulkUpdatePackings: builder.mutation<Packing[], { packings: Packing[] }>({
       query: (payload) => ({
         url: `/packings/bulk_update`,
         method: 'POST',
-        body: {
-          packings: payload.packings,
-        },
+        body: { packings: payload.packings }
+
       }),
-      invalidatesTags: [{ type: 'Packing', id: 'LIST' }],
+      invalidatesTags: (_, error) => error ? [] : [{ type: 'Packing', id: 'LIST' }],
     }),
     deletePacking: builder.mutation<Packing, Pick<Packing, 'id'>>({
       query: ({ id }) => ({
         url: `/packings/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: [{ type: 'Packing', id: 'LIST' }],
+      invalidatesTags: (_, error) => error ? [] : [{ type: 'Packing', id: 'LIST' }],
     }),
   }),
 })
