@@ -1,25 +1,25 @@
-import { ChevronsUpDown, LogOut } from 'lucide-react'
+import { ChevronsUpDown, LogOut } from 'lucide-react';
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu'
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import {
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem
-} from '@/components/ui/sidebar'
-import { useLogoutMutation } from '@/services/auth-api'
-import { useNavigate } from 'react-router'
-import { useAuth } from '@/hooks/use-auth'
+  SidebarMenuItem,
+} from '@/components/ui/sidebar';
+import { useLogoutMutation } from '@/services/auth-api';
+import { useNavigate } from 'react-router';
+import { useAuth } from '@/hooks/use-auth';
 
 export function NavUser() {
-  const { user } = useAuth()
-  const navigate = useNavigate()
-  const [logout, { isLoading }] = useLogoutMutation()
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [logout, { isLoading }] = useLogoutMutation();
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -39,7 +39,7 @@ export function NavUser() {
                 <span className="truncate font-semibold">
                   {user?.first_name} {user?.last_name}
                 </span>
-                <span className="truncate text-xs">{user?.email}</span>
+                <span className="truncate text-xs">{user?.email_address}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -47,8 +47,8 @@ export function NavUser() {
           <DropdownMenuContent align="end" sideOffset={4}>
             <DropdownMenuItem
               onClick={async () => {
-                await logout().unwrap()
-                navigate('/auth/login')
+                await logout().unwrap();
+                navigate('/auth/login');
               }}
               disabled={isLoading}
             >
@@ -59,5 +59,5 @@ export function NavUser() {
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 }

@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       end
 
       resources :calendar_rates, only: %i[index create update destroy]
+      resources :employees, only: %i[index show create update]
     end
   end
 

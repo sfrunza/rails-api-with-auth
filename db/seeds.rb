@@ -24,13 +24,87 @@ User.create!(
   password: "111111",
   role: "admin"
 )
-
 User.create!(
   first_name: "manager",
   last_name: "manager",
   email_address: "manager@mail.com",
   password: "111111",
   role: "manager"
+)
+User.create(
+  first_name: "Test1",
+  last_name: "Test1",
+  email: "test1@mail.com",
+  password: "111111"
+)
+User.create(
+  first_name: "Test2",
+  last_name: "Test2",
+  email: "test2@mail.com",
+  password: "111111"
+)
+User.create(
+  first_name: "Helper",
+  last_name: "Helper",
+  email: "helper@mail.com",
+  role: "helper",
+  password: "111111"
+)
+User.create(
+  first_name: "Helper2",
+  last_name: "Helper2",
+  email: "helper2@mail.com",
+  role: "helper",
+  password: "111111"
+)
+User.create(
+  first_name: "Helper3",
+  last_name: "Helper3",
+  email: "helper3@mail.com",
+  role: "helper",
+  password: "111111"
+)
+User.create(
+  first_name: "Helper4",
+  last_name: "Helper4",
+  email: "helper4@mail.com",
+  role: "helper",
+  password: "111111"
+)
+User.create(
+  first_name: "Driver",
+  last_name: "Driver",
+  email: "driver@mail.com",
+  role: "driver",
+  password: "111111"
+)
+User.create(
+  first_name: "Driver2",
+  last_name: "Driver2",
+  email: "driver2@mail.com",
+  role: "driver",
+  password: "111111"
+)
+User.create(
+  first_name: "Foreman",
+  last_name: "Foreman",
+  email: "foreman@mail.com",
+  role: "foreman",
+  password: "111111"
+)
+User.create(
+  first_name: "Foreman2",
+  last_name: "Foreman2",
+  email: "foreman2@mail.com",
+  role: "foreman",
+  password: "111111"
+)
+User.create(
+  first_name: "Admin",
+  last_name: "Admin",
+  email: "admin@mail.com",
+  role: "admin",
+  password: "111111"
 )
 
 Service.create!(
@@ -105,6 +179,7 @@ Rate.create(name: "High Peak", color: "#fb0009", enable: true)
 
 Truck.create(name: "18 FT")
 Truck.create(name: "20 FT")
+Truck.create(name: "26 FT")
 
 Packing.create(
   name: "I will pack by myself",

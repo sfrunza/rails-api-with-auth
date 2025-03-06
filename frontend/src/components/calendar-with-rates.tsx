@@ -103,7 +103,7 @@ function CalendarWithRates({
               return <Skeleton className="h-8 w-8 p-0" />;
             }
 
-            if (!calendarRates) return <div />;
+            if (!calendarRates) return <></>;
 
             const isSameMonth = date.getMonth() === selectedMonth.getMonth();
 

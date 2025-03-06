@@ -10,6 +10,8 @@ import PackingPage from '@/pages/crm/settings/packing/page';
 import TrucksPage from '@/pages/crm/settings/trucks/page';
 import RatesPage from '@/pages/crm/settings/rates/page';
 import CalendarRatesPage from '@/pages/crm/settings/calendar-rates/page';
+import DepartmentPage from '@/pages/crm/settings/department/page';
+import UserProfilePage from '@/pages/crm/settings/department/user-profile/page';
 
 // const DashboardLayout = lazy(() => import("@/layouts/dashboard/admin/layout"));
 // const DashboardRequestsPage = lazy(
@@ -110,6 +112,16 @@ export const crmRoutes = {
         {
           path: 'calendar-rates',
           element: <CalendarRatesPage />,
+        },
+        {
+          path: 'department',
+          element: <DepartmentPage />,
+          children: [
+            {
+              path: ':id',
+              element: <UserProfilePage />,
+            },
+          ],
         },
       ],
     },
