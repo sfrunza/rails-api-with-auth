@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { store } from "@/store";
 // import { settingsApi } from "@/services/settings-api";
 import { authApi } from "@/services/auth-api";
+import { settingsApi } from "./services/settings-api";
 // import { servicesApi } from "@/services/services-api";
 // import { ratesApi } from "@/services/rates-api";
 // import { calendarRatesApi } from "@/services/calendar-rates-api";
@@ -12,9 +13,9 @@ import { authApi } from "@/services/auth-api";
 
 
 export const settingsLoader = async () => {
-  // store.dispatch(
-  //   settingsApi.util.prefetch("getSettings", undefined, { force: true })
-  // )
+  store.dispatch(
+    settingsApi.util.prefetch("getSettings", undefined, { force: true })
+  )
   const { user } = store.getState().auth;
   const sessionId = Cookies.get("session_id");
 
@@ -27,9 +28,9 @@ export const settingsLoader = async () => {
 
 export const verifyAuthLoader = async () => {
 
-  // store.dispatch(
-  //   settingsApi.util.prefetch("getSettings", undefined, { force: true })
-  // )
+  store.dispatch(
+    settingsApi.util.prefetch("getSettings", undefined, { force: true })
+  )
 
   const sessionId = Cookies.get("session_id");
 

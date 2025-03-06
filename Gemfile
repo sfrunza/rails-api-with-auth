@@ -53,3 +53,4 @@ end
 
 gem "jwt"
 gem "pundit", "~> 2.4"
+gem "rails-settings-cached", "~> 2.9"

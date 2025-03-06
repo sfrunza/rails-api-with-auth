@@ -30,6 +30,10 @@ Rails.application.routes.draw do
 
       resources :calendar_rates, only: %i[index create update destroy]
       resources :employees, only: %i[index show create update]
+
+      resources :settings, only: %i[index create] do
+        collection { post :bulk_update }
+      end
     end
   end
 
