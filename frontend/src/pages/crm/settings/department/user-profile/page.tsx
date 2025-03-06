@@ -11,7 +11,9 @@ import { ProfileForm } from './profile-form';
 
 export default function UserProfilePage() {
   const { id } = useParams();
-  const { data, isLoading } = useGetEmployeeByIdQuery({ id: id as string });
+  const { data, isLoading } = useGetEmployeeByIdQuery({
+    id: id as string,
+  });
 
   return (
     <PageContainer className="space-y-4">

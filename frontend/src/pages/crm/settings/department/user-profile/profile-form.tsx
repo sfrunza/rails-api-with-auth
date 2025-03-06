@@ -92,7 +92,7 @@ export function ProfileForm({
       last_name: user?.last_name ?? '',
       email_address: user?.email_address ?? '',
       phone: user?.phone ?? '',
-      role: user?.role ?? 'helper',
+      role: user?.role ?? '',
       active: user?.active ?? true,
       password: '',
     },
@@ -123,8 +123,6 @@ export function ProfileForm({
       }
     }
   }
-
-  console.log(form.formState.errors);
 
   return (
     <Form {...form}>

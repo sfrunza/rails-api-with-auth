@@ -51,19 +51,19 @@ export const rtkQueryErrorLogger: Middleware = () => (next) => (action) => {
 
     console.error('RTK Query Error:', error);
 
-    // if (error?.status === 401) {
-    //   store.dispatch(logout());
-    // } else if (error?.status === 500) {
-    //   toast.error('Server Error! Please try again later.');
-    // }
-
-    if (error?.status === 500) {
+    if (error?.status === 422) {
+      const errorData = error?.data;
+      if (errorData && typeof errorData === 'object') {
+        Object.entries(errorData).forEach(([key, value]) => {
+          const message = Array.isArray(value) ? value.join(", ") : value;
+          toast.error(`${key.split("_").join(" ")} ${message}`);
+        });
+      }
+    } else if (error?.status === 500) {
       toast.error('Server Error! Please try again later.');
+    } else {
+      toast.error(error?.data?.error || 'An unexpected error occurred.');
     }
-
-
-    console.log(error)
-    toast.error(error?.data?.error || 'An unexpected error occurred.');
   }
 
   return next(action);

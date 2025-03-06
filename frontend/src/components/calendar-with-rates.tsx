@@ -100,7 +100,11 @@ function CalendarWithRates({
             const date = day.date;
 
             if (isLoading) {
-              return <Skeleton className="h-8 w-8 p-0" />;
+              return (
+                <td>
+                  <Skeleton className="h-8 w-8 p-0" />
+                </td>
+              );
             }
 
             if (!calendarRates) return <></>;
@@ -134,19 +138,21 @@ function CalendarWithRates({
             }
 
             return (
-              <button
-                className={cn(
-                  buttonVariants({ variant: 'ghost' }),
-                  'h-8 w-8 p-0 font-semibold aria-selected:opacity-100'
-                )}
-                disabled={!isSameMonth}
-                style={styles}
-                onClick={() => {
-                  onSelectDate(date, rateData);
-                }}
-              >
-                {date.getDate()}
-              </button>
+              <td>
+                <button
+                  className={cn(
+                    buttonVariants({ variant: 'ghost' }),
+                    'h-8 w-8 p-0 font-semibold aria-selected:opacity-100'
+                  )}
+                  disabled={!isSameMonth}
+                  style={styles}
+                  onClick={() => {
+                    onSelectDate(date, rateData);
+                  }}
+                >
+                  {date.getDate()}
+                </button>
+              </td>
             );
           },
         }}

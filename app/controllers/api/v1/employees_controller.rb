@@ -56,7 +56,12 @@ class Api::V1::EmployeesController < ApplicationController
 
   def create
     @employee = User.create(employee_params)
-    render json: @employee
+    authorize @employee
+    if @employee.save
+      render json: @employee, status: :created
+    else
+      render json: @employee.errors, status: :unprocessable_entity
+    end
   end
 
   def update
