@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { type CalendarRate } from '@/types/rate';
 import { CalendarWithRates } from '@/components/calendar-with-rates';
+import { type CalendarRate } from '@/types/rate';
+import { useState } from 'react';
 import SelectRateModal from './select-rate-modal';
 
 const getNextSixMonths = (): Date[] => {
@@ -42,6 +42,7 @@ export default function CalendarRatesList() {
               showFooter={false}
               className="rounded-xl border"
               key={i}
+              hideNavigation
             />
           );
         })}
