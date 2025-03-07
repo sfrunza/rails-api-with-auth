@@ -1,3 +1,9 @@
+@import 'tailwindcss';
+
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:is(.dark *));
+
 @font-face {
   font-family: 'DMSans';
   font-weight: 200 900;
@@ -6,12 +12,6 @@
   font-stretch: 75% 125%;
   src: url('/fonts/DMSans-VariableFont.ttf') format('truetype');
 }
-
-@import 'tailwindcss';
-
-@plugin 'tailwindcss-animate';
-
-@custom-variant dark (&:is(.dark *));
 
 @theme {
   --font-sans: 'DMSans', sans-serif;
