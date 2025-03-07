@@ -19,6 +19,10 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+    cors: {
+      origin: true,
+      credentials: true
+    }
   },
   build: {
     rollupOptions: {
