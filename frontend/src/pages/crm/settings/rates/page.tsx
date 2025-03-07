@@ -26,7 +26,7 @@ const tableGrid =
   'grid grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr_1fr_1fr] items-center gap-4 px-1 text-sm font-medium';
 
 export default function RatesPage() {
-  const { data: dbRates, isLoading } = useGetRatesQuery({});
+  const { data: dbRates, isLoading } = useGetRatesQuery();
   const [bulkUpdateRates, { isLoading: isUpdating }] =
     useBulkUpdateRatesMutation();
 

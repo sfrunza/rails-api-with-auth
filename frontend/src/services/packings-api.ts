@@ -7,8 +7,8 @@ export const packingsApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Packing'],
   endpoints: (builder) => ({
-    getPackings: builder.query<Packing[], {}>({
-      query: ({ }) => `/packings`,
+    getPackings: builder.query<Packing[], void>({
+      query: () => `/packings`,
       providesTags(result) {
         if (result) {
           return [

@@ -1,7 +1,7 @@
-import { NavLink, useLocation } from 'react-router'
-import PageContainer from '@/components/page-container'
-import { buttonVariants } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { NavLink, useLocation } from 'react-router';
+import PageContainer from '@/components/page-container';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import {
   CalculatorIcon,
   CalendarCogIcon,
@@ -11,59 +11,59 @@ import {
   PencilRulerIcon,
   SettingsIcon,
   TruckIcon,
-  UserRoundCogIcon
-} from 'lucide-react'
+  UserRoundCogIcon,
+} from 'lucide-react';
 
 const navLinks = [
   {
+    name: 'Company',
+    href: 'company',
+    icon: SettingsIcon,
+  },
+  {
     name: 'Moving Services',
     href: 'services',
-    icon: PencilRulerIcon
+    icon: PencilRulerIcon,
   },
   {
     name: 'Extra Services',
     href: 'extra-services',
-    icon: HousePlusIcon
+    icon: HousePlusIcon,
   },
   {
     name: 'Packing',
     href: 'packing',
-    icon: Package2Icon
+    icon: Package2Icon,
   },
   { name: 'Trucks', href: 'trucks', icon: TruckIcon, prefetchUrl: '/trucks' },
   {
     name: 'Rates',
     href: 'rates',
-    icon: DollarSignIcon
+    icon: DollarSignIcon,
   },
   {
     name: 'Calendar Rates',
     href: 'calendar-rates',
-    icon: CalendarCogIcon
+    icon: CalendarCogIcon,
   },
   {
     name: 'Department',
     href: 'department',
-    icon: UserRoundCogIcon
-  },
-  {
-    name: 'Company',
-    href: 'company',
-    icon: SettingsIcon
+    icon: UserRoundCogIcon,
   },
   {
     name: 'Calculator',
     href: 'calculator',
-    icon: CalculatorIcon
-  }
-]
+    icon: CalculatorIcon,
+  },
+];
 
 export default function SettingsPage() {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
   return (
     <PageContainer
       className={cn('hidden lg:block lg:border-r', {
-        block: pathname === '/crm/settings'
+        block: pathname === '/crm/settings',
       })}
     >
       <h2 className="px-6 pt-4 text-lg font-semibold">Settings</h2>
@@ -77,7 +77,7 @@ export default function SettingsPage() {
                 cn(
                   buttonVariants({
                     variant: isActive ? 'secondary' : 'ghost',
-                    className: 'w-full justify-start text-left'
+                    className: 'w-full justify-start text-left',
                   })
                 )
               }
@@ -85,9 +85,9 @@ export default function SettingsPage() {
               <item.icon className="size-4" />
               {item.name}
             </NavLink>
-          )
+          );
         })}
       </div>
     </PageContainer>
-  )
+  );
 }

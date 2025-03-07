@@ -32,7 +32,7 @@ export default function ExtraServiceList() {
     data: extraServices,
     isLoading,
     isError,
-  } = useGetExtraServicesQuery({});
+  } = useGetExtraServicesQuery();
   const [bulkUpdateExtraServices, { isLoading: isBulkUpdating }] =
     useBulkUpdateExtraServicesMutation();
 

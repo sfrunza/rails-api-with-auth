@@ -7,8 +7,8 @@ export const trucksApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Truck'],
   endpoints: (builder) => ({
-    getTrucks: builder.query<Truck[], {}>({
-      query: ({ }) => `/trucks`,
+    getTrucks: builder.query<Truck[], void>({
+      query: () => `/trucks`,
       providesTags(result) {
         if (result) {
           return [

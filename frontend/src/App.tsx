@@ -1,14 +1,14 @@
-import { createBrowserRouter, Link, RouterProvider } from 'react-router'
-import { Provider } from 'react-redux'
-import { Toaster } from 'sonner'
-import { store } from '@/store'
-import { authRoutes } from '@/routes/auth.routes'
-import { crmRoutes } from '@/routes/crm.routes'
-import ErrorPage from '@/pages/error/page'
-import AccountPage from '@/pages/account/page'
-import { ThemeProvider } from '@/components/theme-provider'
-import CrmLayout from '@/layouts/crm/layout'
-import DialogProvider from '@/components/dialog-provider'
+import { createBrowserRouter, Link, RouterProvider } from 'react-router';
+import { Provider } from 'react-redux';
+import { Toaster } from 'sonner';
+import { store } from '@/store';
+import { authRoutes } from '@/routes/auth.routes';
+import { crmRoutes } from '@/routes/crm.routes';
+import ErrorPage from '@/pages/error/page';
+import AccountPage from '@/pages/account/page';
+import { ThemeProvider } from '@/components/theme-provider';
+import CrmLayout from '@/layouts/crm/layout';
+import DialogProvider from '@/components/dialog-provider';
 
 const router = createBrowserRouter([
   {
@@ -23,21 +23,21 @@ const router = createBrowserRouter([
         <Link to="/schedule">schedule</Link>
       </div>
     ),
-    errorElement: <ErrorPage />
+    errorElement: <ErrorPage />,
   },
   {
     path: '/account',
-    element: <AccountPage />
+    element: <AccountPage />,
   },
   {
     path: '/crm',
-    element: <CrmLayout />
+    element: <CrmLayout />,
   },
   ...authRoutes,
-  crmRoutes
+  crmRoutes,
   // accountRoutes,
   // dashboardRoutes
-])
+]);
 
 export default function App() {
   return (
@@ -52,5 +52,5 @@ export default function App() {
         <DialogProvider />
       </ThemeProvider>
     </Provider>
-  )
+  );
 }

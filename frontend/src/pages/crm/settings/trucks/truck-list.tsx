@@ -16,7 +16,7 @@ import {
 import { toast } from 'sonner';
 
 export default function TruckList() {
-  const { data: trucks, isLoading, isError } = useGetTrucksQuery({});
+  const { data: trucks, isLoading, isError } = useGetTrucksQuery();
   const [bulkUpdateTrucks, { isLoading: isBulkUpdating }] =
     useBulkUpdateTrucksMutation();
   const [items, setItems] = useState<Truck[]>([]);

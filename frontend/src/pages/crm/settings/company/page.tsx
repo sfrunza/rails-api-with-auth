@@ -1,10 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import SettingPageWrapper from '../setting-page-wrapper';
 import CompanyForm from './company-form';
 import BrandingUploads from './branding-uploads';
@@ -24,10 +18,7 @@ export default function CompanyPage() {
         <div className="space-y-4">
           <Card className="max-w-xl">
             <CardHeader>
-              <CardTitle>Company</CardTitle>
-              <CardDescription>
-                Manage your company information.
-              </CardDescription>
+              <CardTitle>Company Information</CardTitle>
             </CardHeader>
             <CardContent>
               <CompanyForm data={data as Setting} />

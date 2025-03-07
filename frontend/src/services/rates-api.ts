@@ -9,8 +9,8 @@ export const ratesApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Rate', 'CalendarRate'],
   endpoints: (builder) => ({
-    getRates: builder.query<Rate[], {}>({
-      query: ({ }) => `/rates`,
+    getRates: builder.query<Rate[], void>({
+      query: () => `/rates`,
       providesTags(result) {
         if (result) {
           return [

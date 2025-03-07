@@ -30,7 +30,7 @@ import { toast } from 'sonner';
 import PackingItem from './packing-item';
 
 export default function PackingList() {
-  const { data: packings, isLoading, isError } = useGetPackingsQuery({});
+  const { data: packings, isLoading, isError } = useGetPackingsQuery();
   const [bulkUpdatePackings, { isLoading: isBulkUpdating }] =
     useBulkUpdatePackingsMutation();
 

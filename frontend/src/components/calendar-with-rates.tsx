@@ -167,7 +167,7 @@ CalendarWithRates.displayName = 'CalendarWithRates';
 export { CalendarWithRates };
 
 function CalendarFooter() {
-  const { data: dbRates } = useGetRatesQuery({});
+  const { data: dbRates } = useGetRatesQuery();
   return (
     <div className="w-full border-t bg-muted">
       <div className="flex w-full flex-wrap items-center justify-center gap-x-4 gap-y-2 px-6 py-4 text-xs font-semibold">

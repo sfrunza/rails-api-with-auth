@@ -24,7 +24,7 @@ export default function SelectRateModal({
   setIsOpen,
   calendarDayInfo,
 }: SelectRateModalProps) {
-  const { data: dbRates } = useGetRatesQuery({});
+  const { data: dbRates } = useGetRatesQuery();
   const [updateCalendarRate] = useUpdateCalendarRateMutation();
 
   const filteredRates = dbRates?.filter((rate) => rate.enable);
