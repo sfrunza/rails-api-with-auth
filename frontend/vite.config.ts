@@ -26,9 +26,9 @@ export default defineConfig({
         manualChunks(id) {
           // Extract node_modules dependencies
           if (id.includes("node_modules")) {
-            if (id.includes("react") || id.includes("react-dom")) {
-              return "vendor-react"; // React core libs
-            }
+            // if (id.includes("react")) {
+            //   return "vendor-react"; // React core libs
+            // }
             if (id.includes("react-router")) {
               return "vendor-router"; // React Router
             }
