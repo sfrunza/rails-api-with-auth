@@ -4,7 +4,7 @@
   font-display: swap;
   font-style: normal;
   font-stretch: 75% 125%;
-  src: url('/assets/fonts/DMSans-VariableFont.ttf') format('truetype');
+  src: url('/fonts/DMSans-VariableFont.ttf') format('truetype');
 }
 
 @import 'tailwindcss';
