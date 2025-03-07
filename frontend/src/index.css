@@ -10,7 +10,7 @@
   font-display: block;
   font-style: normal;
   font-stretch: 75% 125%;
-  src: url('/assets/fonts/DMSans-VariableFont.ttf') format('truetype');
+  src: url('../public/assets/fonts/DMSans-VariableFont.ttf') format('truetype');
 }
 
 @theme {
