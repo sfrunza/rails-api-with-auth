@@ -52,5 +52,5 @@ group :development, :test do
 end
 
 gem "jwt"
-gem "pundit", "~> 2.4"
+gem "pundit", "~> 2.5"
 gem "rails-settings-cached", "~> 2.9"
