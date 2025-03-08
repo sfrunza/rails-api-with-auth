@@ -27,12 +27,6 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        assetFileNames: (assetInfo: { name?: string }) => {
-          if (assetInfo.name && /\.(woff2?|ttf|eot|otf)$/.test(assetInfo.name)) {
-            return "fonts/[name][extname]";
-          }
-          return "[name].[hash][extname]";
-        },
         manualChunks(id) {
           // Extract node_modules dependencies
           if (id.includes("node_modules")) {
