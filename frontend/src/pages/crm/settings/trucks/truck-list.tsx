@@ -73,9 +73,9 @@ export default function TruckList() {
         {items?.map((truck, idx) => (
           <div
             key={truck.id}
-            className="flex items-center gap-6 font-medium md:gap-10"
+            className="grid grid-cols-[6rem_3rem_1fr] gap-6 items-center"
           >
-            <div className="flex min-w-fit items-center gap-4 text-sm text-muted-foreground">
+            <div className="flex items-center gap-4 text-sm text-muted-foreground">
               <TruckIcon className="size-5" />
               <span>Truck {idx + 1}</span>
             </div>

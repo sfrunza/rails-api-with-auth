@@ -48,7 +48,7 @@ export default function ExtraServiceItem({
       className={cn(
         'grid grid-cols-[max-content_3fr_1fr_1fr_1fr] items-center gap-4 p-2',
         {
-          'bg-background': isDragging,
+          'bg-background shadow-lg': isDragging,
         }
       )}
     >
