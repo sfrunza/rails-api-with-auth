@@ -16,6 +16,9 @@ export type QueryFn = BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryErr
 const baseQuery: QueryFn = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_URL,
   credentials: 'include',
+  // headers: {
+  //   'Content-Type': 'application/json',
+  // }
 });
 
 

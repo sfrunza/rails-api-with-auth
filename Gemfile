@@ -54,3 +54,5 @@ end
 gem "jwt"
 gem "pundit", "~> 2.5"
 gem "rails-settings-cached", "~> 2.9"
+gem "acts_as_list"
+gem "aws-sdk-s3", "~> 1.182"

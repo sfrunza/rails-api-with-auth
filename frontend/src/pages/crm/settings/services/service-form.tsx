@@ -1,23 +1,23 @@
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { toast } from "sonner";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { toast } from 'sonner';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-import { Input } from "@/components/ui/input";
-import { useCreateServiceMutation } from "@/services/services-api";
-import { LoadingButton } from "@/components/loading-button";
+import { Input } from '@/components/ui/input';
+import { useCreateServiceMutation } from '@/services/services-api';
+import { LoadingButton } from '@/components/loading-button';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 
 const formSchema = z.object({
   name: z
     .string()
-    .min(5, { message: "Service name must be at least 5 characters" }),
+    .min(5, { message: 'Service name must be at least 5 characters' }),
 });
 
 type Inputs = z.infer<typeof formSchema>;
@@ -27,9 +27,9 @@ export default function ServiceForm() {
 
   const form = useForm<Inputs>({
     resolver: zodResolver(formSchema),
-    reValidateMode: "onChange",
+    reValidateMode: 'onChange',
     defaultValues: {
-      name: "",
+      name: '',
     },
   });
 
@@ -42,10 +42,7 @@ export default function ServiceForm() {
   return (
     <div>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="mb-4 flex gap-4"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="flex gap-4">
           <FormField
             control={form.control}
             name="name"
@@ -56,6 +53,7 @@ export default function ServiceForm() {
                     {...field}
                     placeholder="Service name"
                     autoComplete="off"
+                    className="bg-accent"
                   />
                 </FormControl>
                 <FormMessage />

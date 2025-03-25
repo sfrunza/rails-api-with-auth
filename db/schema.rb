@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_06_231533) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_21_163610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -69,6 +69,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_06_231533) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "move_sizes", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.integer "index", default: 0
+    t.integer "dispersion"
+    t.integer "truck_count"
+    t.integer "weight"
+    t.integer "volume"
+    t.jsonb "volume_with_dispersion", default: {"max" => 0, "min" => 0}
+    t.jsonb "crew_size_settings", default: [[2, 2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2, 2], [2, 2, 2, 3, 2, 2, 2], [2, 2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2, 2], [2, 2, 2, 2, 2, 2, 2]]
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "packings", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -85,7 +99,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_06_231533) do
     t.boolean "enable"
     t.string "name"
     t.string "color"
-    t.jsonb "movers_rates", default: {"2"=>{"hourly_rate"=>10000}, "3"=>{"hourly_rate"=>10000}, "4"=>{"hourly_rate"=>10000}, "5"=>{"hourly_rate"=>10000}, "6"=>{"hourly_rate"=>10000}, "7"=>{"hourly_rate"=>10000}, "8"=>{"hourly_rate"=>10000}, "9"=>{"hourly_rate"=>10000}, "10"=>{"hourly_rate"=>10000}}
+    t.jsonb "movers_rates", default: {"2" => {"hourly_rate" => 10000}, "3" => {"hourly_rate" => 10000}, "4" => {"hourly_rate" => 10000}, "5" => {"hourly_rate" => 10000}, "6" => {"hourly_rate" => 10000}, "7" => {"hourly_rate" => 10000}, "8" => {"hourly_rate" => 10000}, "9" => {"hourly_rate" => 10000}, "10" => {"hourly_rate" => 10000}}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

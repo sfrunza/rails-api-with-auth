@@ -73,10 +73,10 @@ export default function PackingForm({ data }: PackingFormProps) {
   async function onSubmit(values: Inputs) {
     if (isEditing) {
       await updatePacking({ id: data.id, ...values }).unwrap();
-      toast.success(`${values.name} successfully updated`);
+      toast.success('Packing successfully updated');
     } else {
       await createPacking(values).unwrap();
-      toast.success(`${values.name} successfully added`);
+      toast.success('Packing successfully added');
     }
     form.reset();
     onClose();
@@ -109,47 +109,49 @@ export default function PackingForm({ data }: PackingFormProps) {
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Textarea {...field} rows={16} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="labor_increase"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Labor increse (%)</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="number"
-                      pattern="[0-9]+"
-                      inputMode="numeric"
-                      {...field}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+            <div className="-mx-6 max-h-[calc(100vh-250px)] overflow-y-auto px-6 pb-4 space-y-4">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <Textarea rows={16} {...field} />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="labor_increase"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Labor increse (%)</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        pattern="[0-9]+"
+                        inputMode="numeric"
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
             <DialogFooter>
               <DialogClose>Cancel</DialogClose>
               <LoadingButton

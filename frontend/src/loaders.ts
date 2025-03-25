@@ -9,6 +9,7 @@ import { calendarRatesApi } from "@/services/calendar-rates-api";
 import { trucksApi } from "@/services/trucks-api";
 import { packingsApi } from "@/services/packings-api";
 import { extraServicesApi } from "@/services/extra-services-api";
+import { moveSizesApi } from "./services/move-sizes-api";
 
 
 export const settingsLoader = async () => {
@@ -55,7 +56,7 @@ export const verifyAuthLoader = async () => {
 
 async function fetchAdditionalData() {
 
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  // await new Promise((resolve) => setTimeout(resolve, 2000));
 
   store.dispatch(
     servicesApi.endpoints.getServices.initiate()
@@ -75,5 +76,8 @@ async function fetchAdditionalData() {
   store.dispatch(
     extraServicesApi.endpoints.getExtraServices.initiate()
   )
+  store.dispatch(
+    moveSizesApi.endpoints.getMoveSizes.initiate()
+  ).unwrap();
 }
 

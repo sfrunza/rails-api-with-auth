@@ -48,7 +48,12 @@ export default function TruckForm() {
           render={({ field }) => (
             <FormItem className="w-full">
               <FormControl>
-                <Input {...field} placeholder="Truck name" className="w-full" />
+                <Input
+                  {...field}
+                  placeholder="Truck name"
+                  autoComplete="off"
+                  className="bg-accent"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

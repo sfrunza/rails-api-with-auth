@@ -179,8 +179,7 @@ export default function RatesPage() {
                     }}
                   />
                   <Button
-                    variant="ghost"
-                    className="text-primary hover:text-primary"
+                    variant="outline"
                     onClick={() => {
                       setCurrentEdit((prev) => (prev === idx ? null : idx));
                     }}

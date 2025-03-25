@@ -34,6 +34,10 @@ Rails.application.routes.draw do
       resources :settings, only: %i[index create] do
         collection { post :bulk_update }
       end
+
+      resources :move_sizes, only: %i[index create update destroy] do
+        collection { post :bulk_update }
+      end
     end
   end
 
