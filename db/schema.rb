@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_21_163610) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_26_142159) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -53,6 +53,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_21_163610) do
     t.datetime "updated_at", null: false
     t.index ["date"], name: "index_calendar_rates_on_date"
     t.index ["rate_id"], name: "index_calendar_rates_on_rate_id"
+  end
+
+  create_table "entrance_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "form_name", null: false
+    t.integer "index", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "extra_services", force: :cascade do |t|

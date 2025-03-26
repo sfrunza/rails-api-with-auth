@@ -74,7 +74,7 @@ export default function MoveSizeList() {
     <div className="flex flex-col gap-6">
       {isLoading && (
         <div className="space-y-2">
-          {Array.from({ length: 8 }).map((_, i) => (
+          {Array.from({ length: 5 }).map((_, i) => (
             <Skeleton className="h-19.5 w-full" key={i} />
           ))}
         </div>

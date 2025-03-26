@@ -10,6 +10,7 @@ import { trucksApi } from "@/services/trucks-api";
 import { packingsApi } from "@/services/packings-api";
 import { extraServicesApi } from "@/services/extra-services-api";
 import { moveSizesApi } from "./services/move-sizes-api";
+import { entranceTypesApi } from "./services/entrance-types-api";
 
 
 export const settingsLoader = async () => {
@@ -78,6 +79,9 @@ async function fetchAdditionalData() {
   )
   store.dispatch(
     moveSizesApi.endpoints.getMoveSizes.initiate()
+  ).unwrap();
+  store.dispatch(
+    entranceTypesApi.endpoints.getEntranceTypes.initiate()
   ).unwrap();
 }
 

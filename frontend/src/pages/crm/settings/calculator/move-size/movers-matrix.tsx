@@ -1,6 +1,6 @@
-import { useGetSettingsQuery } from '@/services/settings-api';
 import { Input } from '@/components/ui/input';
 import { MoveSize } from '@/types/move-size';
+import { useGetEntranceTypesQuery } from '@/services/entrance-types-api';
 
 interface MoversMatrixProps {
   value: MoveSize['crew_size_settings'];
@@ -8,11 +8,9 @@ interface MoversMatrixProps {
 }
 
 export function MoversMatrix({ value, onChange }: MoversMatrixProps) {
-  const { data } = useGetSettingsQuery();
+  const { data: floorOptions } = useGetEntranceTypesQuery();
 
-  if (!data) return null;
-
-  const floorOptions = data?.floor_options;
+  if (!floorOptions) return null;
 
   const handleCellChange = (
     rowIndex: number,
@@ -44,7 +42,12 @@ export function MoversMatrix({ value, onChange }: MoversMatrixProps) {
           {/* Grid content */}
           <div className="bg-background p-4 flex-1">
             {/* Column headers */}
-            <div className="grid grid-cols-8 mb-4">
+            <div
+              className="grid mb-4"
+              style={{
+                gridTemplateColumns: `repeat(${floorOptions.length + 1}, 1fr)`,
+              }}
+            >
               <div></div>
               {floorOptions.map((floor, index) => (
                 <div
@@ -61,7 +64,12 @@ export function MoversMatrix({ value, onChange }: MoversMatrixProps) {
               {floorOptions.map((originFloor, originIndex) => (
                 <div
                   key={`row-${originIndex}`}
-                  className="grid grid-cols-8 gap-2 items-center"
+                  className="grid gap-2 items-center"
+                  style={{
+                    gridTemplateColumns: `repeat(${
+                      floorOptions.length + 1
+                    }, 1fr)`,
+                  }}
                 >
                   {/* Row header */}
                   <div className="text-muted-foreground text-sm font-medium text-center">

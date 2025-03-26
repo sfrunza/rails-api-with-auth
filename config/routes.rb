@@ -38,6 +38,10 @@ Rails.application.routes.draw do
       resources :move_sizes, only: %i[index create update destroy] do
         collection { post :bulk_update }
       end
+
+      resources :entrance_types, only: %i[index create destroy] do
+        collection { post :bulk_update }
+      end
     end
   end
 

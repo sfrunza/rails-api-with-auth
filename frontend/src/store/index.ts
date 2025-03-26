@@ -22,6 +22,7 @@ import { rtkQueryErrorLogger } from "@/services/base-service";
 import { employeesApi } from "@/services/employees-api";
 import { settingsApi } from "@/services/settings-api";
 import { moveSizesApi } from "@/services/move-sizes-api";
+import { entranceTypesApi } from "@/services/entrance-types-api";
 
 export const store = configureStore({
   reducer: {
@@ -42,6 +43,7 @@ export const store = configureStore({
     [employeesApi.reducerPath]: employeesApi.reducer,
     [settingsApi.reducerPath]: settingsApi.reducer,
     [moveSizesApi.reducerPath]: moveSizesApi.reducer,
+    [entranceTypesApi.reducerPath]: entranceTypesApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -57,6 +59,7 @@ export const store = configureStore({
       employeesApi.middleware,
       settingsApi.middleware,
       moveSizesApi.middleware,
+      entranceTypesApi.middleware,
     ),
 });
 

@@ -43,6 +43,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { useGetEntranceTypesQuery } from '@/services/entrance-types-api';
 
 const DEFAULT_MATRIX = [
   [2, 2, 2, 2, 2, 2, 2],
@@ -53,6 +54,28 @@ const DEFAULT_MATRIX = [
   [2, 2, 2, 2, 2, 2, 2],
   [2, 2, 2, 2, 2, 2, 2],
 ];
+
+function mergeMatrices(matrix1: number[][], matrix2: number[][]): number[][] {
+  const rows1 = matrix1.length;
+  const cols1 = matrix1[0].length;
+  const rows2 = matrix2.length;
+  const cols2 = matrix2[0].length;
+
+  const mergedMatrix: number[][] = [];
+
+  for (let i = 0; i < rows2; i++) {
+    mergedMatrix[i] = [];
+    for (let j = 0; j < cols2; j++) {
+      if (i < rows1 && j < cols1) {
+        mergedMatrix[i][j] = matrix1[i][j];
+      } else {
+        mergedMatrix[i][j] = 2;
+      }
+    }
+  }
+
+  return mergedMatrix;
+}
 
 const formSchema = z.object({
   name: z.string(),
@@ -79,6 +102,7 @@ function getImageData(event: ChangeEvent<HTMLInputElement>) {
 }
 
 export default function MoveSizeForm({ data }: MoveSizeFormProps) {
+  const { data: floorOptions } = useGetEntranceTypesQuery();
   const [createMoveSize, { isLoading: isCreating }] =
     useCreateMoveSizeMutation();
   const [updateMoveSize, { isLoading: isUpdating }] =
@@ -301,7 +325,12 @@ export default function MoveSizeForm({ data }: MoveSizeFormProps) {
                     </p>
                     <FormControl>
                       <MoversMatrix
-                        value={field.value}
+                        value={mergeMatrices(
+                          field.value,
+                          Array(floorOptions?.length ?? 0)
+                            .fill(null)
+                            .map(() => Array(floorOptions?.length ?? 0).fill(2))
+                        )}
                         onChange={field.onChange}
                       />
                     </FormControl>

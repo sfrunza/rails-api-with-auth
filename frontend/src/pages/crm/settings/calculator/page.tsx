@@ -1,9 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Outlet, useParams } from 'react-router';
 import SettingPageWrapper from '../setting-page-wrapper';
-import MoveSizeList from './move-size-list';
-import MoveSizeForm from './move-size-form';
-import { Button } from '@/components/ui/button';
+import MoveSizeForm from './move-size/move-size-form';
+import MoveSizeList from './move-size/move-size-list';
+import EntranceTypeForm from './entrance-type/entrance-type-form';
+import EntranceTypeList from './entrance-type/entrance-type-list';
 
 export default function CalculatorPage() {
   const params = useParams();
@@ -27,9 +28,11 @@ export default function CalculatorPage() {
         <Card className="max-w-3xl">
           <CardHeader className="flex flex-row justify-between">
             <CardTitle>Stairs</CardTitle>
-            <Button>Add Stairs</Button>
+            <EntranceTypeForm />
           </CardHeader>
-          <CardContent className="space-y-2">asdasd</CardContent>
+          <CardContent>
+            <EntranceTypeList />
+          </CardContent>
         </Card>
       </div>
     </SettingPageWrapper>
