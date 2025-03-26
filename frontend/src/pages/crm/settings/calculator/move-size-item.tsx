@@ -26,7 +26,7 @@ export default function MoveSizeItem({ item }: MoveSizeItemProps) {
     transition,
     zIndex: isDragging ? 1000 : 'auto',
     position: isDragging ? 'relative' : 'static',
-    touchAction: 'none',
+    // touchAction: 'none',
   };
 
   return (

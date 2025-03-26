@@ -109,7 +109,7 @@ export default function PackingForm({ data }: PackingFormProps) {
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="-mx-6 max-h-[calc(100vh-250px)] overflow-y-auto px-6 pb-4 space-y-4">
+            <div className="-mx-6 max-h-[calc(100vh-280px)] overflow-y-auto px-6 pb-4 space-y-4">
               <FormField
                 control={form.control}
                 name="name"

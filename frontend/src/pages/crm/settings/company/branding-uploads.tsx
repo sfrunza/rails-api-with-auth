@@ -1,144 +1,102 @@
-import { LoadingButton } from "@/components/loading-button";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
 import {
   useGetSettingsQuery,
   useUpdateLogoMutation,
-} from "@/services/settings-api";
-import { Upload } from "lucide-react";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
+} from '@/services/settings-api';
+import { cn } from '@/lib/utils';
+import { LoadingButton } from '@/components/loading-button';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from '@/components/ui/form';
+import { Separator } from '@/components/ui/separator';
+
+const formSchema = z.object({
+  image: z.instanceof(File).nullable(),
+});
+
+type Inputs = z.infer<typeof formSchema>;
+
+function getImageData(event: ChangeEvent<HTMLInputElement>) {
+  const file = event.target.files && event.target.files[0];
+  const displayUrl = file ? URL.createObjectURL(file) : '';
+
+  return { file, displayUrl };
+}
 
 export default function CompanyForm() {
   const { data } = useGetSettingsQuery();
   const [updateLogo, { isLoading: isUpdating }] = useUpdateLogoMutation();
+  const [preview, setPreview] = useState<string | null>(null);
 
-  const [logoFile, setLogoFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
+  const form = useForm<Inputs>({
+    defaultValues: {
+      image: null,
+    },
+  });
 
-  const companyLogo = data?.company_logo;
-
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const formData = new FormData();
-    if (logoFile) {
-      formData.append("setting[company_logo]", logoFile);
-    }
-
-    const newData = await updateLogo({ data: formData }).unwrap();
-
-    if (newData) {
-      toast.success("Changes saved");
-    }
+  async function onSubmit(values: Inputs) {
+    await updateLogo({ image: values.image! }).unwrap();
+    toast.success('Changes saved');
+    form.reset();
   }
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setLogoFile(file);
-
-      const objectUrl = URL.createObjectURL(file);
-      setPreviewUrl(objectUrl);
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragging(false);
-
-    const file = e.dataTransfer.files?.[0];
-    if (file && file.type.startsWith("image/")) {
-      setLogoFile(file);
-      const objectUrl = URL.createObjectURL(file);
-      setPreviewUrl(objectUrl);
-    }
-  };
-
-  const handleCancel = () => {
-    setLogoFile(null);
-    setPreviewUrl(null);
-    setIsDragging(false);
-    // Reset the file input value
-    const fileInput = document.getElementById(
-      "logo-upload",
-    ) as HTMLInputElement;
-    if (fileInput) {
-      fileInput.value = "";
-    }
-  };
-
   useEffect(() => {
-    return () => {
-      if (previewUrl) {
-        URL.revokeObjectURL(previewUrl);
-      }
-    };
-  }, [previewUrl]);
+    if (data) {
+      setPreview(data.company_logo);
+    }
+  }, [data]);
 
   return (
-    <form onSubmit={onSubmit} className="space-y-6">
-      <div className="space-y-4">
-        <div
-          className={cn(
-            "relative flex h-28 w-40 cursor-pointer flex-col items-center justify-center rounded-lg transition-colors",
-            "border-2 border-dashed border-gray-300 dark:border-gray-700",
-            "hover:bg-gray-50 dark:hover:bg-gray-800/50",
-            isDragging && "border-primary bg-gray-50 dark:bg-gray-800/50",
-            (previewUrl || companyLogo) && "h-28 w-40",
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="image"
+          render={({ field: { value, onChange, ...fieldProps } }) => (
+            <FormItem>
+              <FormLabel>Logo</FormLabel>
+              <FormControl>
+                <Input
+                  {...fieldProps}
+                  placeholder="Image"
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  multiple={false}
+                  onChange={(event) => {
+                    const { file, displayUrl } = getImageData(event);
+                    setPreview(displayUrl);
+                    onChange(file);
+                  }}
+                />
+              </FormControl>
+            </FormItem>
           )}
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-          onClick={() => document.getElementById("logo-upload")?.click()}
-        >
-          {previewUrl || companyLogo ? (
-            <img
-              src={previewUrl || companyLogo}
-              alt="Company logo"
-              className="h-full w-full rounded-lg object-contain"
-            />
-          ) : (
-            <div className="flex flex-col items-center justify-center space-y-2 text-center">
-              <div className="rounded-full bg-gray-100 p-4 dark:bg-gray-800">
-                <Upload className="h-6 w-6 text-gray-500 dark:text-gray-400" />
-              </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
-                <span className="font-semibold text-primary">
-                  Click to upload
-                </span>{" "}
-                or drag and drop
-              </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                SVG, PNG, JPG or GIF (max. 2MB)
-              </p>
+        />
+        <div className="flex justify-center items-center">
+          {preview && (
+            <div className="relative size-40 p-1 rounded-md border-2 border-dashed">
+              <img
+                src={preview}
+                alt="Company logo"
+                className="h-full w-full rounded-md object-contain"
+              />
             </div>
           )}
         </div>
-        <Input
-          id="logo-upload"
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="hidden"
-        />
-      </div>
-      <div className="border-t pt-4">
+        <Separator />
         <div
-          className={cn("flex transition-opacity duration-500 sm:justify-end", {
-            "invisible opacity-0": !previewUrl,
-            "visible opacity-100": previewUrl,
+          className={cn('flex transition-opacity duration-500 sm:justify-end', {
+            'invisible opacity-0': !form.formState.isDirty,
+            'visible opacity-100': form.formState.isDirty,
           })}
         >
           <div className="flex min-h-9 w-full gap-4 sm:w-auto">
@@ -146,7 +104,10 @@ export default function CompanyForm() {
               type="button"
               variant="outline"
               className="w-full sm:w-auto"
-              onClick={handleCancel}
+              onClick={() => {
+                setPreview(data?.company_logo || null);
+                form.reset();
+              }}
             >
               Cancel
             </Button>
@@ -160,7 +121,7 @@ export default function CompanyForm() {
             </LoadingButton>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </Form>
   );
 }

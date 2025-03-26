@@ -38,12 +38,16 @@ export const settingsApi = createApi({
       }),
       invalidatesTags: (_, error) => error ? [] : ["Setting"],
     }),
-    updateLogo: builder.mutation<Setting, { data: FormData }>({
-      query: ({ data }) => ({
-        url: `/settings/bulk_update`,
-        method: "POST",
-        body: data
-      }),
+    updateLogo: builder.mutation<Setting, { image: File }>({
+      query: ({ image }) => {
+        const formData = new FormData();
+        formData.append('setting[company_logo]', image);
+        return {
+          url: `/settings/bulk_update`,
+          method: "POST",
+          body: formData,
+        }
+      },
       invalidatesTags: ["Setting"],
     }),
   }),

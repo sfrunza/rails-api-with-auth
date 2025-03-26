@@ -92,12 +92,12 @@ export function MoversMatrix({ value, onChange }: MoversMatrixProps) {
           </div>
         </div>
       </div>
-      <div className=" md:pl-6">
+      {/* <div className=" md:pl-6">
         <p className="">
           Example: From 2st floor To 4th floor-{value[1][3]}movers
         </p>
         <p className="">Example: From house To elevator-{value[5][6]}movers</p>
-      </div>
+      </div> */}
     </>
   );
 }

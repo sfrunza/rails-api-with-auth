@@ -1,25 +1,25 @@
-import { Outlet } from 'react-router'
-import Cookies from 'js-cookie'
-import { Separator } from '@/components/ui/separator'
+import { Outlet } from 'react-router';
+import Cookies from 'js-cookie';
+import { Separator } from '@/components/ui/separator';
 import {
   SidebarInset,
   SidebarProvider,
-  SidebarTrigger
-} from '@/components/ui/sidebar'
-import { ModeToggle } from '@/components/mode-toggle'
-import { AppSidebar } from './app-sidebar'
-import { CreateRequestButton } from './create-request-button'
-import { GlobalSearch } from './global-search'
-import MessageNotifications from './message-notifications'
+  SidebarTrigger,
+} from '@/components/ui/sidebar';
+import { ModeToggle } from '@/components/mode-toggle';
+import { AppSidebar } from './app-sidebar';
+import { CreateRequestButton } from './create-request-button';
+import { GlobalSearch } from './global-search';
+import MessageNotifications from './message-notifications';
 
 export default function CrmLayout() {
-  const defaultOpen = Cookies.get('sidebar_state') !== 'false'
+  const defaultOpen = Cookies.get('sidebar_state') !== 'false';
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar />
       <CrmMain />
     </SidebarProvider>
-  )
+  );
 }
 
 function CrmMain() {
@@ -43,5 +43,5 @@ function CrmMain() {
         <Outlet />
       </div>
     </SidebarInset>
-  )
+  );
 }
