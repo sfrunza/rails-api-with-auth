@@ -62,14 +62,14 @@ export default function TruckList() {
 
   return (
     <div className="mt-6 flex flex-col gap-6">
+      {isLoading && (
+        <div className="space-y-4">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Skeleton className="h-9 w-full" key={i} />
+          ))}
+        </div>
+      )}
       <div className="space-y-4">
-        {isLoading && (
-          <>
-            {Array.from({ length: 3 }).map((_, i) => (
-              <Skeleton className="h-9 w-full" key={i} />
-            ))}
-          </>
-        )}
         {items?.map((truck, idx) => (
           <div
             key={truck.id}

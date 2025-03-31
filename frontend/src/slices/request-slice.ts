@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TFullRequest } from "@/types/request";
+import { TRequest } from "@/types/request";
 
 interface RequestState {
-  request: TFullRequest | null;
-  changes: Partial<TFullRequest>,
+  request: TRequest | null;
+  changes: Partial<TRequest>,
   hasChanges: boolean,
-  parklotRequests: TFullRequest[] | null
+  parklotRequests: TRequest[] | null
 }
 
 const initialState: RequestState = {
@@ -19,13 +19,13 @@ const requestSlice = createSlice({
   name: "request",
   initialState,
   reducers: {
-    setRequest(state, action: PayloadAction<TFullRequest>) {
+    setRequest(state, action: PayloadAction<TRequest>) {
       state.request = {
         ...state.request,
         ...action.payload
       }
     },
-    updateField: (state, action: PayloadAction<Partial<TFullRequest>>) => {
+    updateField: (state, action: PayloadAction<Partial<TRequest>>) => {
       state.changes = {
         ...state.changes,
         ...action.payload
@@ -36,7 +36,7 @@ const requestSlice = createSlice({
       state.changes = {};
       state.hasChanges = false;
     },
-    setParklotRequests: (state, action: PayloadAction<TFullRequest[] | null>) => {
+    setParklotRequests: (state, action: PayloadAction<TRequest[] | null>) => {
       state.parklotRequests = action.payload
     },
   },

@@ -78,7 +78,7 @@ export default function PackingList() {
       {isLoading && (
         <div className="space-y-2">
           {Array.from({ length: 3 }).map((_, i) => (
-            <Skeleton className="h-11 w-full" key={i} />
+            <Skeleton className="h-17.5 w-full" key={i} />
           ))}
         </div>
       )}

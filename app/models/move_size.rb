@@ -4,7 +4,7 @@ class MoveSize < ApplicationRecord
   has_one_attached :image
 
   validates :name, presence: true
-  acts_as_list column: :index
+  acts_as_list column: :index, top_of_list: 0
 
   before_save :custom_active_storage_path
 

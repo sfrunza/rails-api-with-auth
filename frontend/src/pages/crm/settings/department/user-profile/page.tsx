@@ -16,7 +16,7 @@ export default function UserProfilePage() {
   });
 
   return (
-    <PageContainer className="space-y-4">
+    <PageContainer className="space-y-4 bg-muted dark:bg-background">
       <div className="space-y-2">
         <div className="flex w-full items-center gap-4 px-4 pt-4 lg:border-none">
           <Button variant="outline" size="icon" asChild>

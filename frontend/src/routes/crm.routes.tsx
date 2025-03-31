@@ -14,6 +14,7 @@ import DepartmentPage from '@/pages/crm/settings/department/page';
 import UserProfilePage from '@/pages/crm/settings/department/user-profile/page';
 import CompanyPage from '@/pages/crm/settings/company/page';
 import CalculatorPage from '@/pages/crm/settings/calculator/page';
+import RequestsPage from '@/pages/crm/requests/page';
 
 // const DashboardLayout = lazy(() => import("@/layouts/dashboard/admin/layout"));
 // const DashboardRequestsPage = lazy(
@@ -81,7 +82,7 @@ export const crmRoutes = {
     },
     {
       path: 'requests',
-      element: <div>Requests</div>,
+      element: <RequestsPage />,
     },
     {
       path: 'dispatch',

@@ -97,7 +97,13 @@ export default function ExtraServiceList() {
           <p></p>
         </div>
         <Separator />
-        {isLoading && <LoadingSkeleton />}
+        {isLoading && (
+          <div className="space-y-2 pt-4">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Skeleton className="h-13 w-full" key={i} />
+            ))}
+          </div>
+        )}
         {extraServices && (
           <DndContext
             sensors={sensors}
@@ -158,25 +164,6 @@ export default function ExtraServiceList() {
           </LoadingButton>
         </div>
       </div>
-    </div>
-  );
-}
-
-function LoadingSkeleton() {
-  return (
-    <div className="space-y-4 py-6">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <div
-          key={i}
-          className="grid grid-cols-[max-content_3fr_1fr_1fr_1fr] gap-4"
-        >
-          <Skeleton className="h-9 w-full" />
-          <Skeleton className="h-9 w-full" />
-          <Skeleton className="h-9 w-full" />
-          <Skeleton className="h-9 w-full" />
-          <Skeleton className="h-9 w-full" />
-        </div>
-      ))}
     </div>
   );
 }

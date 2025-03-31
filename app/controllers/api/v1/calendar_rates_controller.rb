@@ -7,8 +7,11 @@ class Api::V1::CalendarRatesController < ApplicationController
   def index
     calendar_rates =
       CalendarRate
-        .includes(:rate)
-        .select(
+        .where(
+          date: Date.today.beginning_of_month..11.months.from_now.end_of_month
+        )
+        .order(:date)
+        .pluck(
           :id,
           :date,
           :rate_id,
@@ -16,21 +19,16 @@ class Api::V1::CalendarRatesController < ApplicationController
           :enable_auto_booking,
           :is_blocked
         )
-        .where(
-          date: Date.today.beginning_of_month..11.months.from_now.end_of_month
-        )
-        .order(:date)
 
     formatted_rates =
       calendar_rates.each_with_object({}) do |rate, hash|
-        hash[rate.date.strftime("%Y-%m-%d")] = {
-          id: rate.id,
-          formated_date: rate.date.strftime("%Y-%m-%d"),
-          rate_id: rate.rate_id,
-          enable_automation: rate.enable_automation,
-          enable_auto_booking: rate.enable_auto_booking,
-          is_blocked: rate.is_blocked,
-          rate: rate.rate
+        hash[rate[1].strftime("%Y-%m-%d")] = {
+          id: rate[0],
+          formatted_date: rate[1].strftime("%Y-%m-%d"),
+          rate_id: rate[2],
+          enable_automation: rate[3],
+          enable_auto_booking: rate[4],
+          is_blocked: rate[5]
         }
       end
 

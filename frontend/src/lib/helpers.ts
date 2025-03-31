@@ -36,3 +36,27 @@ export function hexToRgb(hex: string) {
 
   return `${r}, ${g}, ${b}`;
 }
+
+export function priceObjectToString(
+  price?: { min: number; max: number }
+): string {
+
+  if (!price) return "To be determined";
+
+  const { min, max } = price;
+
+  if (min == null || max == null) return "To be determined";
+
+  const minPrice = formatCentsToDollarsString(min);
+  const maxPrice = formatCentsToDollarsString(max);
+
+  if (min === max) {
+    return maxPrice;
+  }
+
+  if (max === 0) {
+    return minPrice;
+  } else {
+    return `${minPrice} - ${maxPrice}`;
+  }
+}

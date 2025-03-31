@@ -16,7 +16,7 @@ export default function SettingPageWrapper({
   className,
 }: PageProps) {
   return (
-    <PageContainer className="space-y-4">
+    <PageContainer className="space-y-4 bg-muted dark:bg-background">
       <div className="flex w-full items-center gap-4 px-4 pt-4 lg:border-none">
         <div className="lg:hidden">
           <Button variant="outline" size="icon" asChild>

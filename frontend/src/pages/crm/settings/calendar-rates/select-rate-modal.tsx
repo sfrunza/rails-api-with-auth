@@ -31,10 +31,10 @@ export default function SelectRateModal({
 
   if (!isOpen && !calendarDayInfo) return null;
 
-  const { id: calendarDateId, rate, is_blocked } = calendarDayInfo;
-  const selectedRateId = rate?.id ?? 0;
+  const { id: calendarDateId, rate_id, is_blocked } = calendarDayInfo;
+  const selectedRateId = rate_id ?? 0;
   const formattedDate = format(
-    new Date(calendarDayInfo.formated_date + 'T00:00:00'),
+    new Date(calendarDayInfo.formatted_date + 'T00:00:00'),
     'PPP'
   );
 

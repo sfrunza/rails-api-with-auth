@@ -8,17 +8,6 @@ export type Setting = {
   company_email: string;
   company_website: string;
   company_logo: string;
-  move_size_options: {
-    id: number;
-    name: string;
-    value: string;
-    movers_count: number[][];
-  }[];
-  floor_options: {
-    id: number;
-    name: string;
-    value: string;
-  }[];
 };
 
 export const settingsApi = createApi({

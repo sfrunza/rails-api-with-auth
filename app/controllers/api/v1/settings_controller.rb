@@ -17,9 +17,7 @@ class Api::V1::SettingsController < ApplicationController
                  else
                    nil
                  end
-               ),
-             floor_options: Setting.floor_options,
-             move_size_options: Setting.move_size_options
+               )
            }
   end
 

@@ -35,6 +35,7 @@ function CalendarWithRates({
   ...props
 }: CalendarProps) {
   const { data: calendarRates, isLoading } = useGetCalendarRatesQuery();
+  const { data: rates } = useGetRatesQuery();
   const [selectedMonth, setSelectedMonth] = useState(props.today ?? new Date());
 
   const today = new Date();
@@ -113,7 +114,7 @@ function CalendarWithRates({
 
             const formattedDate = format(date, 'yyyy-MM-dd') as string;
             const rateData = calendarRates[formattedDate];
-            const rate = rateData?.rate ?? null;
+            const rate = rates?.find((r) => r.id === rateData?.rate_id);
 
             const styles = {
               color: 'inherit',

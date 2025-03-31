@@ -24,8 +24,8 @@ export default function CrmLayout() {
 
 function CrmMain() {
   return (
-    <SidebarInset>
-      <header className="z-50 flex h-16 w-full items-center border-b bg-background px-4">
+    <SidebarInset className="overflow-hidden">
+      <header className="flex h-16 w-full items-center border-b bg-background px-4">
         <div className="flex w-full justify-between">
           <div className="flex items-center gap-2">
             <SidebarTrigger className="-ml-1" />

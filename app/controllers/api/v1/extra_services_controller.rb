@@ -4,7 +4,8 @@ class Api::V1::ExtraServicesController < ApplicationController
 
   # GET /extra_services
   def index
-    extra_services = ExtraService.all.order(:index)
+    extra_services =
+      ExtraService.select(:id, :name, :price, :enabled, :index).order(:index)
 
     render json: extra_services
   end

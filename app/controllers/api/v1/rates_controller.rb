@@ -3,7 +3,16 @@ class Api::V1::RatesController < ApplicationController
 
   # GET /rates
   def index
-    rates = Rate.all.order(:id)
+    rates =
+      Rate.select(
+        :id,
+        :name,
+        :extra_mover_rate,
+        :extra_truck_rate,
+        :enable,
+        :color,
+        :movers_rates
+      ).order(:id)
     render json: rates
   end
 

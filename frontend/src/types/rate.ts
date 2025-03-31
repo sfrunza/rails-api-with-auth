@@ -18,7 +18,7 @@ export interface CalendarRate {
   enable_automation: boolean;
   enable_auto_booking: boolean;
   is_blocked: boolean;
-  formated_date: string
+  formatted_date: string
   rate_id: number | null;
   rate: Rate;
 };

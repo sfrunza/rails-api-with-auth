@@ -1,12 +1,12 @@
 import { type TFilter } from '@/slices/requests-slice';
-import { type TFullRequest } from '@/types/request';
+import { type TRequest } from '@/types/request';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from './base-service';
 import { type User } from '@/types/user';
 import { setRequest } from '@/slices/request-slice';
 
 interface GetRequestsResponse {
-  requests: TFullRequest[],
+  requests: TRequest[],
   total_pages: number
 }
 
@@ -38,7 +38,7 @@ export const requestsApi = createApi({
       query: () => `/requests/status_counts`,
       providesTags: () => [{ type: 'StatusCounts' }],
     }),
-    getRequestById: builder.query<TFullRequest, { id: string }>({
+    getRequestById: builder.query<TRequest, { id: string }>({
       query: ({ id }) => `/requests/${id}`,
       async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
@@ -51,7 +51,7 @@ export const requestsApi = createApi({
         }
       }, providesTags: (_, __, { id }) => [{ type: 'Request', id }],
     }),
-    updateRequest: builder.mutation<TFullRequest, { id: number, data: Partial<TFullRequest> }>({
+    updateRequest: builder.mutation<TRequest, { id: number, data: Partial<TRequest> }>({
       query: ({ id, data }) => ({
         url: `/requests/${id}`,
         method: 'PUT',
@@ -59,7 +59,7 @@ export const requestsApi = createApi({
       }),
       invalidatesTags: [{ type: 'Request', id: 'LIST' }, { type: 'StatusCounts' }]
     }),
-    createRequest: builder.mutation<TFullRequest, Partial<TFullRequest>>({
+    createRequest: builder.mutation<TRequest, Partial<TRequest>>({
       query: (request) => ({
         url: `/requests`,
         method: 'POST',

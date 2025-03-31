@@ -1,6 +1,6 @@
 // import { type User } from  "./user";
 
-export type TFullRequest = {
+export type TRequest = {
   id: number;
   status: TStatus;
   moving_date: string | null;
@@ -41,7 +41,7 @@ export type TFullRequest = {
   crew_size: number;
   rate: number;
   paired_request_id: number | null;
-  paired_request: TFullRequest | null;
+  paired_request: TRequest | null;
   is_moving_from_storage: boolean;
   customer: TCustomer | null;
   customer_id: number;

@@ -1,11 +1,11 @@
-import { TFullRequest } from "@/types/request";
+import { TRequest } from "@/types/request";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface RequestState {
   selectedDate: string
-  selectedRequest: Partial<TFullRequest> | null
+  selectedRequest: Partial<TRequest> | null
   open: boolean;
-  parklotRequests: TFullRequest[] | null
+  parklotRequests: TRequest[] | null
 }
 
 const today = new Date();
@@ -25,16 +25,16 @@ const parklotSlice = createSlice({
     setSelectedDate(state, action: PayloadAction<string>) {
       state.selectedDate = action.payload
     },
-    setSelectedRequest: (state, action: PayloadAction<Partial<TFullRequest> | null>) => {
+    setSelectedRequest: (state, action: PayloadAction<Partial<TRequest> | null>) => {
       state.selectedRequest = action.payload
     },
     setOpen: (state, action: PayloadAction<boolean>) => {
       state.open = action.payload
     },
-    setParklotRequests: (state, action: PayloadAction<TFullRequest[] | null>) => {
+    setParklotRequests: (state, action: PayloadAction<TRequest[] | null>) => {
       state.parklotRequests = action.payload
     },
-    updateParklotRequest: (state, action: PayloadAction<Partial<TFullRequest>>) => {
+    updateParklotRequest: (state, action: PayloadAction<Partial<TRequest>>) => {
       state.parklotRequests = state.parklotRequests?.map(request =>
         request.id === action.payload.id ? {
           ...request,

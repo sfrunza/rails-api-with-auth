@@ -4,7 +4,7 @@ class Api::V1::TrucksController < ApplicationController
 
   # GET /trucks
   def index
-    @trucks = Truck.all.order(:id)
+    @trucks = Truck.select(:id, :name, :is_active).order(:id)
     render json: @trucks
   end
 
