@@ -1,40 +1,41 @@
-import { Link, useNavigate } from 'react-router'
-import { LoadingButton } from '@/components/loading-button'
+import { LoadingButton } from '@/components/loading-button';
+import { PasswordInput } from '@/components/password-input';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
-} from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { useLoginMutation } from '@/services/auth-api'
+  CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useLoginMutation } from '@/services/auth-api';
+import { Link, useNavigate } from 'react-router';
 
 export function LoginForm() {
-  const navigate = useNavigate()
-  const [login, { isLoading }] = useLoginMutation()
+  const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const form = event.currentTarget
-    const email_address = form.email_address.value
-    const password = form.password.value
+    event.preventDefault();
+    const form = event.currentTarget;
+    const email_address = form.email_address.value;
+    const password = form.password.value;
 
-    const response = await login({ email_address, password }).unwrap()
+    const response = await login({ email_address, password }).unwrap();
     switch (response.user.role) {
       case 'admin':
-        navigate('/crm', { replace: true })
-        break
+        navigate('/crm', { replace: true });
+        break;
       case 'manager':
-        navigate('/crm', { replace: true })
-        break
+        navigate('/crm', { replace: true });
+        break;
       case 'customer':
-        navigate('/account', { replace: true })
-        break
+        navigate('/account', { replace: true });
+        break;
       default:
-        navigate('/', { replace: true })
-        break
+        navigate('/', { replace: true });
+        break;
     }
   }
 
@@ -62,12 +63,7 @@ export function LoginForm() {
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              defaultValue={'111111'}
-              required
-            />
+            <PasswordInput id="password" defaultValue={'111111'} required />
           </div>
           <LoadingButton
             loading={isLoading}
@@ -88,5 +84,5 @@ export function LoginForm() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -1,12 +1,4 @@
-import { useState } from 'react';
-
-import { format } from 'date-fns';
-import { useNavigate } from 'react-router';
-
-import { cn, formatDate, formatPhone } from '@/lib/utils';
-
-import { statusBgColors, statusTextColors } from '@/constants/request';
-
+import { badgeVariants } from '@/components/ui/badge';
 import {
   Table,
   TableBody,
@@ -15,28 +7,35 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-// import { formatMoney } from "@/lib/helpers";
-import { badgeVariants } from '@/components/ui/badge';
+import { statusBgColors, statusTextColors } from '@/constants/request';
 import { priceObjectToString } from '@/lib/helpers';
-import { TRequest } from '@/types/request';
+import { cn, formatDate, formatPhone } from '@/lib/utils';
+import { useGetMoveSizesQuery } from '@/services/move-sizes-api';
+import { useGetServicesQuery } from '@/services/services-api';
+import { TTableRequest } from '@/types/request';
+import { format } from 'date-fns';
 import { User2Icon } from 'lucide-react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
-// type TStorageIcons = {
-//   [key: string]: string;
-// };
+type TStorageIcons = {
+  [key: string]: string;
+};
 
-// const storageIcons: TStorageIcons = {
-//   "Moving & Storage": "/svg-icons/warehouse.svg",
-//   "Overnight Truck Storage": "/svg-icons/truck.svg",
-// };
+const storageIcons: TStorageIcons = {
+  'Moving & Storage': '/svg-icons/warehouse.svg',
+  'Overnight Truck Storage': '/svg-icons/truck.svg',
+};
 
-export default function RequestsTable({ requests }: { requests: TRequest[] }) {
+export function RequestsTable({ requests }: { requests: TTableRequest[] }) {
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  const { data: services } = useGetServicesQuery();
+  const { data: moveSizes } = useGetMoveSizesQuery();
 
   function handleRowClick(id: number) {
     if (selectedId === id) {
-      navigate(`/dashboard/requests/${id}`);
+      navigate(`/crm/requests/${id}`);
     } else {
       setSelectedId(id);
     }
@@ -62,20 +61,26 @@ export default function RequestsTable({ requests }: { requests: TRequest[] }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {requests?.map((request: TRequest) => {
+          {requests?.map((request) => {
+            const service = services?.find(
+              (service) => service.id === request.service_id
+            );
+            const moveSize = moveSizes?.find(
+              (moveSize) => moveSize.id === request.move_size_id
+            );
             const fullName = request.customer
               ? `${request.customer?.first_name} ${request.customer?.last_name}`
               : '';
-            // const withStorage =
-            //   request.service.name === "Moving & Storage" ||
-            //   request.service.name === "Overnight Truck Storage";
-            // const isMovingFromStorage = request.is_moving_from_storage;
-            // const hasPairedRequest = request?.paired_request;
-            // const showStorageOrigin =
-            //   withStorage && isMovingFromStorage && hasPairedRequest;
+            const withStorage =
+              service?.name === 'Moving & Storage' ||
+              service?.name === 'Overnight Truck Storage';
+            const isMovingFromStorage = request.is_moving_from_storage;
+            const hasPairedRequest = request?.has_paired_request;
+            const showStorageOrigin =
+              withStorage && isMovingFromStorage && hasPairedRequest;
 
-            // const showStorageDestination =
-            //   withStorage && !isMovingFromStorage && hasPairedRequest;
+            const showStorageDestination =
+              withStorage && !isMovingFromStorage && hasPairedRequest;
 
             return (
               <TableRow
@@ -94,7 +99,7 @@ export default function RequestsTable({ requests }: { requests: TRequest[] }) {
                   <span
                     className={cn(
                       badgeVariants({ variant: 'outline' }),
-                      'relative overflow-hidden'
+                      'relative overflow-hidden border-transparent py-1 px-2'
                     )}
                   >
                     <span
@@ -105,13 +110,18 @@ export default function RequestsTable({ requests }: { requests: TRequest[] }) {
                     <span
                       className={`${
                         statusTextColors[request.status]
-                      } capitalize`}
+                      } capitalize flex items-center gap-2`}
                     >
                       {request.status.replace('_', ' ')}
                     </span>
+                    <div
+                      className={`${
+                        statusBgColors[request.status]
+                      } size-2 rounded-full`}
+                    ></div>
                   </span>
                 </TableCell>
-                <TableCell>{request.service?.name}</TableCell>
+                <TableCell>{service?.name}</TableCell>
                 <TableCell>
                   {formatDate(request.moving_date)}
                   <br />
@@ -123,44 +133,44 @@ export default function RequestsTable({ requests }: { requests: TRequest[] }) {
                   {formatPhone(request.customer?.phone)}
                 </TableCell>
                 <TableCell>
-                  Brookline, MA <br />
-                  02446
-                  {/* {showStorageOrigin ? (
+                  {showStorageOrigin ? (
                     <div className="flex items-center gap-2">
                       <img
-                        src={storageIcons[request.service.name]}
+                        src={storageIcons[service?.name ?? '']}
                         className="size-6"
                       />
                       From storage
                     </div>
                   ) : (
                     <>
-                      {request.origin.city}
+                      {/* {request.origin.city} */}
+                      Brookline,
                       <br />
-                      {request.origin.state} {request.origin.zip}
+                      {/* {request.origin.state} {request.origin.zip} */}
+                      MA, 02446
                     </>
-                  )} */}
+                  )}
                 </TableCell>
                 <TableCell className="items-center gap-2">
-                  Boston, MA <br />
-                  02166
-                  {/* {showStorageDestination ? (
+                  {showStorageDestination ? (
                     <div className="flex items-center gap-2">
                       <img
-                        src={storageIcons[request.service.name]}
+                        src={storageIcons[service?.name ?? '']}
                         className="size-6"
                       />
                       To storage
                     </div>
                   ) : (
                     <>
-                      {request.destination.city}
+                      {/* {request.destination.city} */}
+                      Boston
                       <br />
-                      {request.destination.state} {request.destination.zip}
+                      {/* {request.destination.state} {request.destination.zip} */}
+                      MA, 02123
                     </>
-                  )} */}
+                  )}
                 </TableCell>
-                <TableCell>{request.size}</TableCell>
+                <TableCell>{moveSize?.name}</TableCell>
                 <TableCell>
                   {request.crew_size && (
                     <span className="flex items-center gap-1">

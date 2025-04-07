@@ -1,42 +1,42 @@
 // import { api } from "@/api";
-import { useIsMobile } from '@/hooks/use-mobile'
-import { SearchIcon } from 'lucide-react'
-import { useCallback, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
-import { debounce } from 'throttle-debounce'
+import { useIsMobile } from '@/hooks/use-mobile';
+import { SearchIcon } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+import { debounce } from 'throttle-debounce';
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 import {
   CommandDialog,
   CommandEmpty,
   CommandInput,
-  CommandList
-} from '@/components/ui/command'
-import { api } from '@/lib/api'
+  CommandList,
+} from '@/components/ui/command';
+import { api } from '@/lib/api';
 
 type Data = {
-  id: number
-  name: string
-  email: string
-  phone: string
-  status: string
-}
+  id: number;
+  name: string;
+  email_address: string;
+  phone: string;
+  status: string;
+};
 
 type Highlighting = {
-  [K in keyof Data]?: string
-}
+  [K in keyof Data]?: string;
+};
 
 type ResponseData = {
-  data: Data
-  highlighting: Highlighting
-}
+  data: Data;
+  highlighting: Highlighting;
+};
 
-const DEBOUNCE_DELAY = 500
-const SHORTCUT_KEY = 'k'
+const DEBOUNCE_DELAY = 500;
+const SHORTCUT_KEY = 'k';
 
 interface SearchResultItemProps {
-  item: ResponseData
-  onSelect: () => void
+  item: ResponseData;
+  onSelect: () => void;
 }
 
 const SearchResultItem = ({ item, onSelect }: SearchResultItemProps) => (
@@ -45,8 +45,8 @@ const SearchResultItem = ({ item, onSelect }: SearchResultItemProps) => (
     onClick={onSelect}
   >
     {Object.keys(item.data).map((key) => {
-      const value = item.data[key as keyof Data]
-      const highlightedValue = item.highlighting[key as keyof Data]
+      const value = item.data[key as keyof Data];
+      const highlightedValue = item.highlighting[key as keyof Data];
       return (
         <div
           key={key}
@@ -58,76 +58,76 @@ const SearchResultItem = ({ item, onSelect }: SearchResultItemProps) => (
           {highlightedValue ? (
             <span
               dangerouslySetInnerHTML={{
-                __html: highlightedValue
+                __html: highlightedValue,
               }}
             />
           ) : (
             <span>{value}</span>
           )}
         </div>
-      )
+      );
     })}
   </div>
-)
+);
 
 export function GlobalSearch() {
-  const navigate = useNavigate()
-  const isMobile = useIsMobile()
-  const [open, setOpen] = useState(false)
-  const [searchTerm, setSearchTerm] = useState('')
-  const [results, setResults] = useState<ResponseData[]>([])
-  const [isSearching, setIsSearching] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const navigate = useNavigate();
+  const isMobile = useIsMobile();
+  const [open, setOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [results, setResults] = useState<ResponseData[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSearch = useCallback(async (query: string) => {
     if (!query.trim()) {
-      setResults([])
-      setIsSearching(false)
-      return
+      setResults([]);
+      setIsSearching(false);
+      return;
     }
 
     try {
       const response = await api.get(
         `/search?query=${encodeURIComponent(query)}`
-      )
-      setResults(response.data)
-      setError(null)
+      );
+      setResults(response.data);
+      setError(null);
     } catch (error) {
-      console.error(error)
-      setResults([])
-      setError('Failed to fetch search results')
+      console.error(error);
+      setResults([]);
+      setError('Failed to fetch search results');
     } finally {
-      setIsSearching(false)
+      setIsSearching(false);
     }
-  }, [])
+  }, []);
 
   const debouncedSearch = useCallback(
     debounce(DEBOUNCE_DELAY, handleSearch, { atBegin: false }),
     [handleSearch]
-  )
+  );
 
   const handleInputChange = (search: string) => {
-    setIsSearching(true)
-    setSearchTerm(search)
-    debouncedSearch(search)
-  }
+    setIsSearching(true);
+    setSearchTerm(search);
+    debouncedSearch(search);
+  };
 
   const handleResultSelect = (itemId: number) => {
-    setOpen(false)
-    navigate(`/dashboard/requests/${itemId}`)
-  }
+    setOpen(false);
+    navigate(`/crm/requests/${itemId}`);
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === SHORTCUT_KEY && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault()
-        setOpen((open) => !open)
+        e.preventDefault();
+        setOpen((open) => !open);
       }
-    }
+    };
 
-    document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [])
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
     <>
@@ -169,5 +169,5 @@ export function GlobalSearch() {
         </CommandList>
       </CommandDialog>
     </>
-  )
+  );
 }

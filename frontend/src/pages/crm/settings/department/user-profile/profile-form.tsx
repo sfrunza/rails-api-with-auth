@@ -26,6 +26,7 @@ import { isValidPhoneNumber } from 'libphonenumber-js';
 import { toast } from 'sonner';
 import { PhoneInput } from '@/components/ui/phone-input';
 import { Separator } from '@/components/ui/separator';
+import { PasswordInput } from '@/components/password-input';
 
 export const userRoles = [
   {
@@ -211,10 +212,10 @@ export function ProfileForm({
               <FormItem className="grid grid-cols-6 items-center gap-x-4 gap-y-1 space-y-0">
                 <FormLabel className="col-span-2">Password</FormLabel>
                 <FormControl>
-                  <Input
+                  <PasswordInput
                     {...field}
                     autoComplete="off"
-                    type="password"
+                    // type="password"
                     className="col-span-4"
                   />
                 </FormControl>

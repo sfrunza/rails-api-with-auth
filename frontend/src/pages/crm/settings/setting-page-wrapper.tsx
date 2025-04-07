@@ -1,4 +1,4 @@
-import PageContainer from '@/components/page-container';
+import { PageContainer } from '@/components/page-container';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ChevronLeftIcon } from 'lucide-react';

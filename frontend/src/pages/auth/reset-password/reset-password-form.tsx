@@ -1,33 +1,33 @@
-import { Link, useNavigate, useSearchParams } from 'react-router'
-import { toast } from 'sonner'
-import { useResetPasswordMutation } from '@/services/auth-api'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { LoadingButton } from '@/components/loading-button'
+import { LoadingButton } from '@/components/loading-button';
+import { PasswordInput } from '@/components/password-input';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
-} from '@/components/ui/card'
+  CardTitle,
+} from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { useResetPasswordMutation } from '@/services/auth-api';
+import { Link, useNavigate, useSearchParams } from 'react-router';
+import { toast } from 'sonner';
 
 export function ResetPasswordForm() {
-  const redirect = useNavigate()
-  const [searchParams] = useSearchParams()
-  const token = searchParams.get('token')
-  const [resetPassword, { isLoading }] = useResetPasswordMutation()
+  const redirect = useNavigate();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get('token');
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const form = event.currentTarget
-    const password = form.password.value
+    event.preventDefault();
+    const form = event.currentTarget;
+    const password = form.password.value;
     resetPassword({ password, token: token ?? '' })
       .unwrap()
       .then((response) => {
-        toast.success(response.message)
-        redirect('/auth/login')
-      })
+        toast.success(response.message);
+        redirect('/auth/login');
+      });
   }
   return (
     <Card className="mx-auto max-w-sm">
@@ -41,9 +41,8 @@ export function ResetPasswordForm() {
         <form className="grid gap-4" onSubmit={onSubmit}>
           <div className="grid gap-2">
             <Label htmlFor="password">New password</Label>
-            <Input
+            <PasswordInput
               id="password"
-              type="password"
               placeholder="New password"
               required
               defaultValue={'333333'}
@@ -66,5 +65,5 @@ export function ResetPasswordForm() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

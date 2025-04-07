@@ -10,8 +10,10 @@
 
 puts "Deleting old records..."
 
+Request.delete_all
 Service.delete_all
 Packing.delete_all
+CalendarRate.delete_all
 Rate.delete_all
 Truck.delete_all
 Session.delete_all
@@ -34,76 +36,96 @@ User.create!(
 User.create(
   first_name: "Test1",
   last_name: "Test1",
-  email: "test1@mail.com",
+  email_address: "test1@mail.com",
   password: "111111"
 )
 User.create(
   first_name: "Test2",
   last_name: "Test2",
-  email: "test2@mail.com",
+  email_address: "test2@mail.com",
   password: "111111"
 )
 User.create(
   first_name: "Helper",
   last_name: "Helper",
-  email: "helper@mail.com",
+  email_address: "helper@mail.com",
   role: "helper",
   password: "111111"
 )
 User.create(
   first_name: "Helper2",
   last_name: "Helper2",
-  email: "helper2@mail.com",
+  email_address: "helper2@mail.com",
   role: "helper",
   password: "111111"
 )
 User.create(
   first_name: "Helper3",
   last_name: "Helper3",
-  email: "helper3@mail.com",
+  email_address: "helper3@mail.com",
   role: "helper",
   password: "111111"
 )
 User.create(
   first_name: "Helper4",
   last_name: "Helper4",
-  email: "helper4@mail.com",
+  email_address: "helper4@mail.com",
   role: "helper",
   password: "111111"
 )
 User.create(
   first_name: "Driver",
   last_name: "Driver",
-  email: "driver@mail.com",
+  email_address: "driver@mail.com",
   role: "driver",
   password: "111111"
 )
 User.create(
   first_name: "Driver2",
   last_name: "Driver2",
-  email: "driver2@mail.com",
+  email_address: "driver2@mail.com",
   role: "driver",
   password: "111111"
 )
 User.create(
   first_name: "Foreman",
   last_name: "Foreman",
-  email: "foreman@mail.com",
+  email_address: "foreman@mail.com",
   role: "foreman",
   password: "111111"
 )
 User.create(
   first_name: "Foreman2",
   last_name: "Foreman2",
-  email: "foreman2@mail.com",
+  email_address: "foreman2@mail.com",
   role: "foreman",
   password: "111111"
 )
 User.create(
   first_name: "Admin",
   last_name: "Admin",
-  email: "admin@mail.com",
+  email_address: "admin@mail.com",
   role: "admin",
+  password: "111111"
+)
+
+User.create(
+  first_name: "Customer1",
+  last_name: "Customer1",
+  email_address: "customer1@mail.com",
+  password: "111111"
+)
+User.create(
+  first_name: "Customer2",
+  last_name: "Customer2",
+  email_address: "customer2@mail.com",
+  password: "111111"
+)
+
+User.create(
+  first_name: "Customer3",
+  last_name: "Customer3",
+  email_address: "customer3@mail.com",
   password: "111111"
 )
 
@@ -204,5 +226,55 @@ Packing.create(
   labor_increase: 50,
   index: 2
 )
+
+# Create requests
+
+customer_ids = User.where(role: "customer").pluck(:id)
+service_ids = Service.pluck(:id)
+packing_ids = Packing.pluck(:id)
+move_size_ids = MoveSize.pluck(:id)
+
+puts "Creating 1000 requests..."
+
+requests_to_create = 1000
+batch_size = 100
+progress = 0
+
+(requests_to_create / batch_size).times do
+  requests =
+    batch_size.times.map do
+      {
+        customer_id: customer_ids.sample,
+        status: %w[
+          pending
+          pending_info
+          pending_date
+          hold
+          not_confirmed
+          confirmed
+          not_available
+          completed
+          spam
+          canceled
+          refused
+          closed
+          expired
+          archived
+        ].sample,
+        moving_date: rand(1.month.ago..3.months.from_now),
+        service_id: service_ids.sample,
+        packing_id: packing_ids.sample,
+        move_size_id: move_size_ids.sample
+      }
+    end
+
+  Request.insert_all!(requests)
+
+  progress += batch_size
+  puts "Created #{progress} requests..."
+end
+
+puts "Finished creating requests!"
+puts "Total requests: #{Request.count}"
 
 puts "Seeding complete!"

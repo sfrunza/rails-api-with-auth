@@ -57,7 +57,7 @@ function RowData({ user }: { user: User }) {
         <span
           className={cn(
             badgeVariants({ variant: 'outline' }),
-            'relative overflow-hidden'
+            'relative overflow-hidden border-transparent'
           )}
         >
           <span

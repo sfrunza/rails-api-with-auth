@@ -1,24 +1,25 @@
+import { PageContainer } from '@/components/page-container';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import PageContainer from '@/components/page-container';
 import {
   statusBgColors,
   statusTextColors,
   tabOptions,
 } from '@/constants/request';
-import RequestsTable from './requests-table';
-import { useAppDispatch, useAppSelector } from '@/store';
-// import { TablePagination } from './table-pagination';
-import { setFilter, setPage, TFilter } from '@/slices/requests-slice';
+import { cn } from '@/lib/utils';
 import {
   useGetRequestsQuery,
   useGetStatusCountsQuery,
 } from '@/services/requests-api';
+import { setFilter, setPage, TFilter } from '@/slices/requests-slice';
+import { useAppDispatch, useAppSelector } from '@/store';
+import { RequestsTable } from './requests-table';
+import { TablePagination } from './table-pagination';
 
 export default function RequestsPage() {
   const dispatch = useAppDispatch();
-  const { data: statusCounts } = useGetStatusCountsQuery();
   const { filter, page } = useAppSelector((state) => state.requests);
+  const { data: statusCounts } = useGetStatusCountsQuery();
   const { data: requestsData } = useGetRequestsQuery({ filter, page });
 
   return (
@@ -30,17 +31,17 @@ export default function RequestsPage() {
           dispatch(setPage(1));
         }}
       >
-        <ScrollArea className="pb-2">
+        <ScrollArea>
           <TabsList className="h-12">
             {tabOptions.map((tab) => (
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className={`${
+                className={cn(
+                  'h-full w-[180px] space-x-2',
+                  `data-[state=active]:${statusTextColors[tab.value]}`,
                   statusTextColors[tab.value]
-                } data-[state=active]:${
-                  statusTextColors[tab.value]
-                } h-full w-[180px] space-x-2`}
+                )}
               >
                 <span>{tab.label}</span>
                 <span
@@ -57,9 +58,9 @@ export default function RequestsPage() {
         </ScrollArea>
       </Tabs>
       <RequestsTable requests={requestsData?.requests ?? []} />
-      {/* {requestsData && (
+      {requestsData && (
         <TablePagination totalPages={requestsData.total_pages} />
-      )} */}
+      )}
     </PageContainer>
   );
 }

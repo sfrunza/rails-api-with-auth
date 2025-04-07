@@ -1,12 +1,12 @@
 import { type TFilter } from '@/slices/requests-slice';
-import { type TRequest } from '@/types/request';
+import { TTableRequest, type TRequest } from '@/types/request';
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from './base-service';
 import { type User } from '@/types/user';
 import { setRequest } from '@/slices/request-slice';
 
 interface GetRequestsResponse {
-  requests: TRequest[],
+  requests: TTableRequest[],
   total_pages: number
 }
 

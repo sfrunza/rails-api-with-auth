@@ -40,7 +40,7 @@ export const statusOptions: TStatusOption[] = Object.entries(STATUS_OPTIONS).map
 
 // Ttabs --------------------------------------
 
-type TTabs =
+type TTab =
   | "All Requests"
   | "Pending"
   | "Not Confirmed"
@@ -67,7 +67,7 @@ type TTabOptions = {
   | "refused"
   | "closed"
   | "expired"
-  | "archived"]: TTabs;
+  | "archived"]: TTab;
 };
 
 const TAB_OPTIONS: TTabOptions = {
@@ -86,13 +86,13 @@ const TAB_OPTIONS: TTabOptions = {
 };
 
 type TTabOption = {
-  label: TTabs;
+  label: TTab;
   value: keyof TTabOptions;
 };
 
 export const tabOptions: TTabOption[] = Object.entries(TAB_OPTIONS).map(
   ([value, label]) => ({
-    label: label as TTabs,
+    label: label as TTab,
     value: value as keyof TTabOptions,
   })
 );
@@ -123,7 +123,7 @@ export const statusBgColors: Record<TStatus | "all", string> = {
   "hold": "bg-amber-500",
   "not_confirmed": "bg-indigo-500",
   "confirmed": "bg-[#00a455]",
-  "not_available": "bg-muted-foreground",
+  "not_available": "bg-foreground",
   "completed": "bg-[#26a9f4]",
   "spam": "bg-muted-foreground",
   "canceled": "bg-red-500",

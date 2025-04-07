@@ -8,6 +8,8 @@ class MoveSize < ApplicationRecord
 
   before_save :custom_active_storage_path
 
+  has_many :requests
+
   def custom_active_storage_path
     if image.attached? && image.blob.new_record?
       image.blob.update(key: custom_path)

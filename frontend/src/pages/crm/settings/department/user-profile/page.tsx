@@ -1,4 +1,4 @@
-import PageContainer from '@/components/page-container';
+import { PageContainer } from '@/components/page-container';
 import { Spinner } from '@/components/spinner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';

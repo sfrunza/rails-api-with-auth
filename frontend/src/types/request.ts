@@ -65,6 +65,7 @@ export type TRequest = {
   created_at: string;
   updated_at: string;
 };
+
 export type TStatus = "pending" | "pending_info" | "pending_date" | "hold" | "not_confirmed" | "confirmed" | "not_available" | "completed" | "spam" | "canceled" | "refused" | "closed" | "expired" | "archived";
 
 export type TAddress = {
@@ -99,4 +100,37 @@ export type TMenuRequest = {
   status: TStatus;
   origin: TAddress;
   destination: TAddress;
+};
+
+
+export type TTableRequest = {
+  id: number;
+  moving_date: string | null;
+  service_id: number;
+  move_size_id: number;
+  status: TStatus;
+  customer: {
+    first_name: string;
+    last_name: string;
+    phone: string;
+  };
+  created_at: string;
+  updated_at: string;
+  total_price: {
+    max: number;
+    min: number;
+  };
+  crew_size: number | null;
+  is_moving_from_storage: boolean;
+  has_paired_request: boolean;
+  origin: {
+    city: string;
+    state: string;
+    zip: string;
+  };
+  destination: {
+    city: '';
+    state: '';
+    zip: '';
+  };
 };

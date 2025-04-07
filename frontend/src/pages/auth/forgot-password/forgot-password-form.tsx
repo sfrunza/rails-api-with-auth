@@ -1,30 +1,30 @@
-import { Link } from 'react-router'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { LoadingButton } from '@/components/loading-button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
-} from '@/components/ui/card'
-import { LoadingButton } from '@/components/loading-button'
-import { useForgotPasswordMutation } from '@/services/auth-api'
-import { toast } from 'sonner'
+  CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useForgotPasswordMutation } from '@/services/auth-api';
+import { Link } from 'react-router';
+import { toast } from 'sonner';
 
 export function ForgotPasswordForm() {
-  const [forgotPassword, { isLoading }] = useForgotPasswordMutation()
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const form = event.currentTarget
-    const email_address = form.email_address.value
+    event.preventDefault();
+    const form = event.currentTarget;
+    const email_address = form.email_address.value;
     forgotPassword({ email_address })
       .unwrap()
       .then((response) => {
-        toast.success(response.message)
-        form.reset()
-      })
+        toast.success(response.message);
+        form.reset();
+      });
   }
   return (
     <Card className="mx-auto max-w-sm">
@@ -66,5 +66,5 @@ export function ForgotPasswordForm() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

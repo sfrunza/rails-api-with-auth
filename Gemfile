@@ -49,6 +49,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "ruby-lsp"
   gem "erb-formatter", "~> 0.7.3", require: false
+  gem "foreman"
 end
 
 gem "jwt"
@@ -56,3 +57,5 @@ gem "pundit", "~> 2.5"
 gem "rails-settings-cached", "~> 2.9"
 gem "acts_as_list"
 gem "aws-sdk-s3", "~> 1.182"
+gem "active_model_serializers"
+gem "kaminari"

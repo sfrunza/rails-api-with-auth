@@ -1,5 +1,5 @@
 import { NavLink, useLocation } from 'react-router';
-import PageContainer from '@/components/page-container';
+import { PageContainer } from '@/components/page-container';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import {

@@ -42,6 +42,20 @@ Rails.application.routes.draw do
       resources :entrance_types, only: %i[index create destroy] do
         collection { post :bulk_update }
       end
+
+      resources :requests do
+        post "pair", on: :member
+        get "status_counts", on: :collection
+        # resources :messages, only: %i[index create]
+        # resources :payments do
+        #   get :get_card_on_file, on: :collection
+        # end
+        # resource :contract, only: %i[create show update]
+        post :images, on: :member
+        delete "/images/:image_id", to: "requests#delete_image", on: :member
+      end
+
+      resources :search, only: %i[index]
     end
   end
 

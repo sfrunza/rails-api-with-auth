@@ -15,6 +15,9 @@ import UserProfilePage from '@/pages/crm/settings/department/user-profile/page';
 import CompanyPage from '@/pages/crm/settings/company/page';
 import CalculatorPage from '@/pages/crm/settings/calculator/page';
 import RequestsPage from '@/pages/crm/requests/page';
+import RequestPage from '@/pages/crm/request/page';
+import MessagesLayout from '@/pages/crm/messages/layout';
+import MessagePage from '@/pages/crm/messages/message/page';
 
 // const DashboardLayout = lazy(() => import("@/layouts/dashboard/admin/layout"));
 // const DashboardRequestsPage = lazy(
@@ -85,8 +88,22 @@ export const crmRoutes = {
       element: <RequestsPage />,
     },
     {
+      path: 'requests/:id',
+      element: <RequestPage />,
+    },
+    {
       path: 'dispatch',
       element: <div>Dispatch</div>,
+    },
+    {
+      path: 'messages',
+      element: <MessagesLayout />,
+      children: [
+        {
+          path: ':id',
+          element: <MessagePage />,
+        },
+      ],
     },
     {
       path: 'settings',
